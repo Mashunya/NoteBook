@@ -1,0 +1,86 @@
+2017-06-09_13:54:26.409 [main] INFO  NoteBook.Entity.NoteBook - Запись успешно добавлена
+2017-06-09_14:39:36.098 [main] ERROR NoteBook.Entity.NoteBook - При загрузке файла с записями произошла ошибка. Записи не были загружены. Файл будет создан
+NoteBook.Exception.NoteBookLoadException: null
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Entity.NoteBook.init(NoteBook.java:78) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:40) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:68) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-09_16:33:29.427 [main] ERROR NoteBook.Entity.NoteBook - При загрузке файла с записями произошла ошибка. Записи не были загружены. Файл будет создан
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Entity.NoteBook.init(NoteBook.java:76) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:33) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-09_16:33:29.551 [main] ERROR NoteBook.Entity.NoteBook - Количесво аргументов массива меньше ожидаемого
+NoteBook.Exception.ArrLengthValidateException: Количесво аргументов массива меньше ожидаемого
+	at NoteBook.Validators.ArrLengthValidator.validate(ArrLengthValidator.java:11) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.AddCommand.execute(AddCommand.java:26) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:54) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:62) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+2017-06-09_16:36:40.637 [main] ERROR NoteBook.Entity.NoteBook - При загрузке файла с записями произошла ошибка. Записи не были загружены. Файл будет создан
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Entity.NoteBook.init(NoteBook.java:76) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:33) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-09_16:36:40.806 [main] ERROR NoteBook.Entity.NoteBook - Количесво аргументов массива меньше ожидаемого
+2017-06-09_17:07:35.073 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Entity.NoteBook.init(NoteBook.java:82) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:32) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:60) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-09_17:07:35.091 [main] WARN  NoteBook.Entity.NoteBook - FindAll: не создано ни одной записи
+2017-06-09_17:07:59.201 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Entity.NoteBook.init(NoteBook.java:82) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:32) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:60) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-09_17:07:59.427 [main] INFO  NoteBook.Entity.NoteBook - Запись first record успешно добавлена
+2017-06-09_17:08:24.543 [main] ERROR NoteBook.Command.FindByIDCommand - Количесво аргументов массива меньше ожидаемого
+NoteBook.Exception.ArrLengthValidateException: Количесво аргументов массива меньше ожидаемого
+	at NoteBook.Validators.ArrLengthValidator.validate(ArrLengthValidator.java:11) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.FindByIDCommand.execute(FindByIDCommand.java:29) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:53) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+2017-06-09_17:08:36.853 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 2 не найдена
+2017-06-09_17:09:44.476 [main] INFO  NoteBook.Entity.NoteBook - Запись second record успешно добавлена
+2017-06-09_17:09:53.523 [main] INFO  NoteBook.Entity.NoteBook - Запись third record успешно добавлена
+2017-06-09_17:10:11.294 [main] INFO  NoteBook.Entity.NoteBook - Запись fourth record успешно добавлена
+2017-06-09_17:10:23.464 [main] INFO  NoteBook.Entity.NoteBook - Запись c ID: 1 успешно удалена
