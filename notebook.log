@@ -84,3 +84,12 @@ NoteBook.Exception.ArrLengthValidateException:  оличесво аргументов массива мень
 2017-06-09_17:09:53.523 [main] INFO  NoteBook.Entity.NoteBook - «апись third record успешно добавлена
 2017-06-09_17:10:11.294 [main] INFO  NoteBook.Entity.NoteBook - «апись fourth record успешно добавлена
 2017-06-09_17:10:23.464 [main] INFO  NoteBook.Entity.NoteBook - «апись c ID: 1 успешно удалена
+2017-06-12_08:55:16.841 [main] INFO  NoteBook.Entity.NoteBook - «апись fifth record успешно добавлена
+2017-06-12_08:55:43.883 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 8 не найдена
+2017-06-12_08:55:51.029 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 5 не найдена
+2017-06-12_09:02:41.047 [main] ERROR NoteBook.Command.FindByIDCommand - ѕри преобразовании строки к неотрицаельному целому числу произошла ошибка
+NoteBook.Exception.ZeroOrNaturalNumberFormatException: ѕри преобразовании строки к неотрицаельному целому числу произошла ошибка
+	at NoteBook.Validators.ZeroOrNaturalNumberValidator.validate(ZeroOrNaturalNumberValidator.java:16) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.FindByIDCommand.execute(FindByIDCommand.java:30) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:58) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:70) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]

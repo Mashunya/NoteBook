@@ -1,8 +1,9 @@
 package NoteBook.Command;
 
-import NoteBook.Entity.NoteBook;
 import NoteBook.Exception.ValidateException;
+import NoteBook.Services.NoteBookService;
 import NoteBook.Validators.ArrLengthValidator;
+import NoteBook.View.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,10 +13,12 @@ import org.slf4j.LoggerFactory;
 public class AddCommand implements Command {
 
     private static final Logger logger = LoggerFactory.getLogger(AddCommand.class);
-    private NoteBook noteBook;
+    private NoteBookService noteBookService;
+    private View view;
 
-    public AddCommand(NoteBook noteBook) {
-        this.noteBook = noteBook;
+    public AddCommand(NoteBookService noteBookService, View view) {
+        this.noteBookService = noteBookService;
+        this.view = view;
     }
 
     @Override
@@ -24,9 +27,9 @@ public class AddCommand implements Command {
         ArrLengthValidator validator = new ArrLengthValidator();
         try {
             validator.validate(params, 2);
-            noteBook.addRecord(params[1]);
+            noteBookService.addRecord(params[1]);
         } catch(ValidateException ex) {
-            System.out.println(ex.getMessage());
+            view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }
     }

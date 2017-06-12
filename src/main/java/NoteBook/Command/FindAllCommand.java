@@ -1,20 +1,21 @@
 package NoteBook.Command;
 
-import NoteBook.Entity.NoteBook;
+import NoteBook.Services.NoteBookService;
+import NoteBook.View.View;
 
 /**
  * Created by Маша on 08.06.2017.
  */
 public class FindAllCommand implements Command {
 
-    private NoteBook noteBook;
+    private NoteBookService noteBookService;
 
-    public FindAllCommand(NoteBook noteBook) {
-        this.noteBook = noteBook;
+    public FindAllCommand(NoteBookService noteBookService) {
+        this.noteBookService = noteBookService;
     }
 
     @Override
     public void execute(String... params) {
-        noteBook.findAll();
+        noteBookService.findAll();
     }
 }

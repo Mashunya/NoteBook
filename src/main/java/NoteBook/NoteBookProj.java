@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import NoteBook.Command.*;
+import NoteBook.Services.NoteBookService;
+import NoteBook.View.ConsoleView;
+import NoteBook.View.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,38 +22,44 @@ import org.slf4j.LoggerFactory;
 public class NoteBookProj {
     private static final Logger logger = LoggerFactory.getLogger(NoteBookProj.class);
 
-    private NoteBook noteBook;
+    private NoteBookService noteBookService;
+    private View view;
     private Map<String, Command> commandMap = new HashMap<>();
 
     public void init() throws PropFileLoadException {
 
         PropsLoader propsLoader = new PropsLoader();
         String fileName = propsLoader.loadPropFromConfig("filename");
-        noteBook = new NoteBook(new SimpleIDGen(), new FileStore(fileName));
+        view = new ConsoleView();
+        noteBookService = new NoteBookService(new NoteBook(), new SimpleIDGen(), new FileStore(fileName), view);
 
         try {
-            noteBook.init();
+            noteBookService.init();
         } catch (NoteBookLoadException ex) {
-            System.out.println(ex.getMessage());
+            view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }
 
-        commandMap.put("add", new AddCommand(noteBook));
-        commandMap.put("delete", new DeleteCommand(noteBook));
-        commandMap.put("findAll", new FindAllCommand(noteBook));
-        commandMap.put("findByID", new FindByIDCommand(noteBook));
-        commandMap.put("help", new HelpCommand());
+        commandMap.put("add", new AddCommand(noteBookService, view));
+        commandMap.put("delete", new DeleteCommand(noteBookService, view));
+        commandMap.put("findAll", new FindAllCommand(noteBookService));
+        commandMap.put("findByID", new FindByIDCommand(noteBookService, view));
+        commandMap.put("help", new HelpCommand(view));
     }
 
     public void workWithNoteBook(String[] args) {
 
-        if(args.length == 0) { 
-            System.out.println("Команда не выбрана");
+        if(args.length == 0) {
+            view.showErrorMessage("Команда не выбрана");
             commandMap.get("help").execute();
             return;
         }
 
         commandMap.get(args[0]).execute(args);
+    }
+
+    public View getView() {
+        return view;
     }
 
     public static void main(String[] args) {
@@ -60,7 +69,7 @@ public class NoteBookProj {
             nodeBookProj.init();
             nodeBookProj.workWithNoteBook(args);
         } catch(PropFileLoadException ex) {
-            System.out.println(ex.getMessage());
+            nodeBookProj.getView().showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }
     }

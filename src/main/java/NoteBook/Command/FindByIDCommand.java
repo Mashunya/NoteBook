@@ -1,10 +1,11 @@
 package NoteBook.Command;
 
-import NoteBook.Entity.NoteBook;
 import NoteBook.Exception.ValidateException;
 import NoteBook.Parsers.IntegerParser;
+import NoteBook.Services.NoteBookService;
 import NoteBook.Validators.ArrLengthValidator;
 import NoteBook.Validators.ZeroOrNaturalNumberValidator;
+import NoteBook.View.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +15,12 @@ import org.slf4j.LoggerFactory;
 public class FindByIDCommand implements Command {
 
     private static final Logger logger = LoggerFactory.getLogger(FindByIDCommand.class);
-    private NoteBook noteBook;
+    private NoteBookService noteBookService;
+    private View view;
 
-    public FindByIDCommand(NoteBook noteBook) {
-        this.noteBook = noteBook;
+    public FindByIDCommand(NoteBookService noteBookService, View view) {
+        this.noteBookService = noteBookService;
+        this.view = view;
     }
 
     @Override
@@ -28,9 +31,9 @@ public class FindByIDCommand implements Command {
         try {
             arrValidator.validate(params, 2);
             numberValidator.validate(params[1]);
-            noteBook.findByID(integerParser.parse(params[1]));
+            noteBookService.findByID(integerParser.parse(params[1]));
         } catch (ValidateException ex) {
-            System.out.println(ex.getMessage());
+            view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }
     }

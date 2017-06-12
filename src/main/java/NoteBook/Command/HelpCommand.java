@@ -1,13 +1,21 @@
 package NoteBook.Command;
 
+import NoteBook.View.View;
+
 /**
  * Created by Маша on 08.06.2017.
  */
 public class HelpCommand implements Command {
 
+    private View view;
+
+    public HelpCommand(View view) {
+        this.view = view;
+    }
+
     @Override
     public void execute(String... params) {
-        System.out.println("Возможные команды:\n" +
+        view.showInfoMessage("Возможные команды:\n" +
                 "1. add \"some text\" - добавить запись\n" +
                 "2. delete recordID - удаление записи по ID\n" +
                 "3. findAll - вывести все записи\n" +
