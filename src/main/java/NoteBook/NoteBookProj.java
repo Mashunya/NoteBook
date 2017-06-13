@@ -1,12 +1,15 @@
 package NoteBook;
 
+import NoteBook.ArgsConverter.ConsoleArgsConverter;
 import NoteBook.Entity.NoteBook;
 import NoteBook.Exception.IllegalCommandParamException;
 import NoteBook.Exception.NoteBookLoadException;
 import NoteBook.Exception.PropFileLoadException;
+import NoteBook.Exception.ValidateException;
 import NoteBook.IDGen.SimpleIDGen;
 import NoteBook.RecordStore.FileStore;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +28,7 @@ public class NoteBookProj {
 
     private NoteBookService noteBookService;
     private View view;
-    private Map<String, Command> commandMap = new HashMap<>();
+    private Map<String, Class> commandMap = new HashMap<>();
 
     public void init() throws PropFileLoadException {
 
@@ -41,26 +44,33 @@ public class NoteBookProj {
             logger.error(ex.getMessage(), ex);
         }
 
-        commandMap.put("add", new AddCommand(noteBookService, view));
-        commandMap.put("delete", new DeleteCommand(noteBookService, view));
-        commandMap.put("findAll", new FindAllCommand(noteBookService));
-        commandMap.put("findByID", new FindByIDCommand(noteBookService, view));
-        commandMap.put("help", new HelpCommand(view));
+        commandMap.put("add", AddCommand.class);
+        commandMap.put("delete", DeleteCommand.class);
+        commandMap.put("findAll", FindAllCommand.class);
+        commandMap.put("findByID", FindByIDCommand.class);
+        commandMap.put("help", HelpCommand.class);
     }
 
     public void workWithNoteBook(String[] args) {
 
-        if (args.length == 0) {
-            view.showErrorMessage("Команда не выбрана");
-            commandMap.get("help").execute();
-            return;
-        }
+        ConsoleArgsConverter argsConverter = new ConsoleArgsConverter();
+        CommandInit commandInit = new CommandInit();
 
-        Command command = commandMap.get(args[0]);
         try {
-            command.initParams(args);
+            Map<String, String> params = argsConverter.convert(args);
+
+            if (args.length == 0) {
+                view.showErrorMessage("Команда не выбрана");
+                commandInit.createCommand(commandMap.get("help"), params).execute();
+                return;
+            }
+
+            Command command = commandInit.createCommand(commandMap.get(args[0]), params);
+            command.setNoteBookService(noteBookService);
+            command.setView(view);
             command.execute();
-        } catch(IllegalCommandParamException ex) {
+
+        } catch(IllegalCommandParamException | ValidateException ex) {
             view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }

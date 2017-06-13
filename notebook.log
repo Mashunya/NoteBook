@@ -88,8 +88,8 @@ NoteBook.Exception.ArrLengthValidateException:  оличесво аргументов массива мень
 2017-06-12_08:55:43.883 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 8 не найдена
 2017-06-12_08:55:51.029 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 5 не найдена
 2017-06-12_09:02:41.047 [main] ERROR NoteBook.Command.FindByIDCommand - ѕри преобразовании строки к неотрицаельному целому числу произошла ошибка
-NoteBook.Exception.ZeroOrNaturalNumberFormatException: ѕри преобразовании строки к неотрицаельному целому числу произошла ошибка
-	at NoteBook.Validators.ZeroOrNaturalNumberValidator.validate(ZeroOrNaturalNumberValidator.java:16) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+NoteBook.Exception.NegativeNumberException: ѕри преобразовании строки к неотрицаельному целому числу произошла ошибка
+	at NoteBook.Validators.NotNegativeNumberValidator.validate(ZeroOrNaturalNumberValidator.java:16) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.Command.FindByIDCommand.execute(FindByIDCommand.java:30) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:58) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:70) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
@@ -309,3 +309,9 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Ќе удаетс€ н
 2017-06-13_10:48:44.781 [main] INFO  NoteBook.Entity.NoteBook - «апись c ID: 0 успешно удалена
 2017-06-13_10:48:52.274 [main] WARN  NoteBook.Entity.NoteBook - FindAll: не создано ни одной записи
 2017-06-13_10:48:57.864 [main] INFO  NoteBook.Entity.NoteBook - «апись успешно добавлена
+2017-06-13_15:03:29.032 [main] INFO  NoteBook.Entity.NoteBook - «апись успешно добавлена
+2017-06-13_15:03:37.698 [main] ERROR NoteBook.NoteBookProj - Ќедопустимый параметр команды: rc_title
+NoteBook.Exception.IllegalCommandParamException: Ќедопустимый параметр команды: rc_title
+	at NoteBook.ArgsConverter.ConsoleArgsConverter.convert(ConsoleArgsConverter.java:39) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:60) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:88) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]

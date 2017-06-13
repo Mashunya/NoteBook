@@ -1,10 +1,7 @@
 package NoteBook.Command;
 
-import NoteBook.Exception.ValidateException;
-import NoteBook.Services.NoteBookService;
 import NoteBook.Validators.Required;
-import NoteBook.Validators.ZeroOrNatural;
-import NoteBook.View.View;
+import NoteBook.Validators.NotNegative;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -13,23 +10,15 @@ import org.slf4j.LoggerFactory;
 public class FindByIDCommand extends Command {
 
     @Required
-    @ZeroOrNatural
+    @NotNegative
     private int recordID;
 
-    public FindByIDCommand(NoteBookService noteBookService, View view) {
+    public FindByIDCommand() {
         this.logger = LoggerFactory.getLogger(FindByIDCommand.class);
-        this.noteBookService = noteBookService;
-        this.view = view;
     }
 
     @Override
     public void execute() {
-        try {
-            validate();
-            noteBookService.findByID(recordID);
-        } catch (ValidateException ex) {
-            view.showErrorMessage(ex.getMessage());
-            logger.error(ex.getMessage(), ex);
-        }
+        noteBookService.findByID(recordID);
     }
 }

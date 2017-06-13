@@ -7,10 +7,6 @@ import NoteBook.Services.NoteBookService;
  */
 public class FindAllCommand extends Command {
 
-    public FindAllCommand(NoteBookService noteBookService) {
-        this.noteBookService = noteBookService;
-    }
-
     @Override
     public void execute() {
         noteBookService.findAll();

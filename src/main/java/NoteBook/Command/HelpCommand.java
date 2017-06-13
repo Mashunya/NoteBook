@@ -7,12 +7,6 @@ import NoteBook.View.View;
  */
 public class HelpCommand extends Command {
 
-    private View view;
-
-    public HelpCommand(View view) {
-        this.view = view;
-    }
-
     @Override
     public void execute() {
         view.showInfoMessage("Возможные команды:\n" +
