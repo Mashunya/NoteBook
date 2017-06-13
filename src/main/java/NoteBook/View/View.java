@@ -8,5 +8,5 @@ import NoteBook.Entity.Record;
 public interface View {
     void showInfoMessage(String message);
     void showErrorMessage(String message);
-    void shoeRecord(Record record);
+    void showRecord(Record record);
 }

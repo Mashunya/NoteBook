@@ -1,6 +1,7 @@
 package NoteBook;
 
 import NoteBook.Entity.NoteBook;
+import NoteBook.Exception.IllegalCommandParamException;
 import NoteBook.Exception.NoteBookLoadException;
 import NoteBook.Exception.PropFileLoadException;
 import NoteBook.IDGen.SimpleIDGen;
@@ -49,13 +50,20 @@ public class NoteBookProj {
 
     public void workWithNoteBook(String[] args) {
 
-        if(args.length == 0) {
+        if (args.length == 0) {
             view.showErrorMessage("Команда не выбрана");
             commandMap.get("help").execute();
             return;
         }
 
-        commandMap.get(args[0]).execute(args);
+        Command command = commandMap.get(args[0]);
+        try {
+            command.initParams(args);
+            command.execute();
+        } catch(IllegalCommandParamException ex) {
+            view.showErrorMessage(ex.getMessage());
+            logger.error(ex.getMessage(), ex);
+        }
     }
 
     public View getView() {

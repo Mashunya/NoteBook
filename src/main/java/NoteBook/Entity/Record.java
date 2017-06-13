@@ -9,15 +9,22 @@ import java.util.Date;
 public class Record implements Serializable {
     private int recordID;
     private String recordText;
-//    private String author;
-//    private Date createdDate;
-//    private Date updatedDate;
-//    private String type;
-//    private String title;
+    private String author;
+    private String title;
+    private String type;
+    private Date createdDate;
+    private Date updatedDate;
 
-    public Record(int recordID, String recordText) {
-        this.recordID = recordID;
+    public Record(String recordText, String author, String title, String type) {
         this.recordText = recordText;
+        this.author = author;
+        this.title = title;
+        this.type = type;
+        this.updatedDate = this.createdDate = new Date();
+    }
+
+    public void setRecordID(int recordID) {
+        this.recordID = recordID;
     }
 
     public int getRecordID() {
@@ -26,5 +33,25 @@ public class Record implements Serializable {
 
     public String getRecordText() {
         return recordText;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 }

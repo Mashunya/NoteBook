@@ -93,3 +93,219 @@ NoteBook.Exception.ZeroOrNaturalNumberFormatException: При преобразовании строки
 	at NoteBook.Command.FindByIDCommand.execute(FindByIDCommand.java:30) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:58) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:70) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+2017-06-13_10:20:25.102 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:39) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:79) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.InvalidClassException: NoteBook.Entity.Record; local class incompatible: stream classdesc serialVersionUID = -6640872969024932363, local class serialVersionUID = -7987936411927278151
+	at java.io.ObjectStreamClass.initNonProxy(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readNonProxyDesc(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readClassDesc(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readOrdinaryObject(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readObject0(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readObject(Unknown Source) ~[na:1.8.0_131]
+	at java.util.ArrayList.readObject(Unknown Source) ~[na:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectStreamClass.invokeReadObject(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readSerialData(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readOrdinaryObject(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readObject0(Unknown Source) ~[na:1.8.0_131]
+	at java.io.ObjectInputStream.readObject(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:27) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:21:07.328 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:39) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:79) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:21:21.051 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:39) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:79) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:24:16.592 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:25:17.674 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:25:17.704 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды
+	at NoteBook.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.lang.NoSuchFieldException: text
+	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.Command.Command.initParams(Command.java:37) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 2 common frames omitted
+2017-06-13_10:29:06.668 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:29:06.717 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
+	at NoteBook.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.lang.NoSuchFieldException: text
+	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.Command.Command.initParams(Command.java:37) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 2 common frames omitted
+2017-06-13_10:30:39.034 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:30:39.062 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
+	at NoteBook.Command.Command.initParams(Command.java:46) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.lang.NoSuchFieldException: text
+	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.Command.Command.initParams(Command.java:38) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 2 common frames omitted
+2017-06-13_10:32:43.377 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:32:43.459 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
+	at NoteBook.Command.Command.initParams(Command.java:51) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.lang.NoSuchFieldException: text
+	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.Command.Command.initParams(Command.java:43) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 2 common frames omitted
+2017-06-13_10:34:50.455 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:34:50.481 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
+	at NoteBook.Command.Command.initParams(Command.java:47) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.lang.NoSuchFieldException: text
+	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.Command.Command.initParams(Command.java:38) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 2 common frames omitted
+2017-06-13_10:38:54.876 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:38:55.008 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
+	at NoteBook.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.lang.IllegalAccessException: Class NoteBook.Command.Command can not access a member of class NoteBook.Command.AddCommand with modifiers "private"
+	at sun.reflect.Reflection.ensureMemberAccess(Unknown Source) ~[na:1.8.0_131]
+	at java.lang.reflect.AccessibleObject.slowCheckMemberAccess(Unknown Source) ~[na:1.8.0_131]
+	at java.lang.reflect.AccessibleObject.checkAccess(Unknown Source) ~[na:1.8.0_131]
+	at java.lang.reflect.Field.set(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.Command.Command.initParams(Command.java:43) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 2 common frames omitted
+2017-06-13_10:45:17.556 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
+NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:31) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Services.NoteBookService.init(NoteBookService.java:89) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.init(NoteBookProj.java:38) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:77) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_131]
+	at java.io.FileInputStream.open(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.io.FileInputStream.<init>(Unknown Source) ~[na:1.8.0_131]
+	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	... 3 common frames omitted
+2017-06-13_10:45:17.742 [main] INFO  NoteBook.Entity.NoteBook - Запись успешно добавлена
+2017-06-13_10:48:44.781 [main] INFO  NoteBook.Entity.NoteBook - Запись c ID: 0 успешно удалена
+2017-06-13_10:48:52.274 [main] WARN  NoteBook.Entity.NoteBook - FindAll: не создано ни одной записи
+2017-06-13_10:48:57.864 [main] INFO  NoteBook.Entity.NoteBook - Запись успешно добавлена

@@ -17,7 +17,13 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void shoeRecord(Record record) {
-        System.out.println(record.getRecordID() + ": " + record.getRecordText());
+    public void showRecord(Record record) {
+        System.out.println("ID: " + record.getRecordID() + "\n" +
+                "Title: " + record.getTitle() + "\n" +
+                "Text: " + record.getRecordText() + "\n" +
+                "Author: " + record.getAuthor() + "\n" +
+                "Type: " + record.getType() + "\n" +
+                "CreatedDate: " + record.getCreatedDate().toString() + "\n" +
+                "UpdateDate: " + record.getUpdatedDate().toString());
     }
 }

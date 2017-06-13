@@ -5,7 +5,7 @@ import NoteBook.View.View;
 /**
  * Created by Маша on 08.06.2017.
  */
-public class HelpCommand implements Command {
+public class HelpCommand extends Command {
 
     private View view;
 
@@ -14,7 +14,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void execute(String... params) {
+    public void execute() {
         view.showInfoMessage("Возможные команды:\n" +
                 "1. add \"some text\" - добавить запись\n" +
                 "2. delete recordID - удаление записи по ID\n" +

@@ -32,13 +32,13 @@ public class NoteBookService {
         this.view = view;
     }
 
-    public void addRecord(String recordText) {
-        Record record = new Record(idGen.getNextID(), recordText);
+    public void addRecord(Record record) {
+        record.setRecordID(idGen.getNextID());
         noteBook.getRecords().add(record);
         try {
             recordStore.saveAllRecords(noteBook.getRecords());
-            view.showInfoMessage("Запись " + recordText + " успешно добавлена");
-            logger.info("Запись " + recordText + " успешно добавлена");
+            view.showInfoMessage("Запись успешно добавлена");
+            logger.info("Запись успешно добавлена");
         } catch(SaveRecordsException ex) {
             view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
@@ -70,14 +70,14 @@ public class NoteBookService {
             logger.warn("FindAll: не создано ни одной записи");
         }
         for(Record record: noteBook.getRecords()) {
-            view.shoeRecord(record);
+            view.showRecord(record);
         }
     }
 
     public void findByID(int recordID) {
         for(Record record: noteBook.getRecords()) {
             if(record.getRecordID() == recordID) {
-                view.shoeRecord(record);
+                view.showRecord(record);
                 return;
             }
         }
