@@ -2,10 +2,7 @@ package NoteBook;
 
 import NoteBook.ArgsConverter.ConsoleArgsConverter;
 import NoteBook.Entity.NoteBook;
-import NoteBook.Exception.IllegalCommandParamException;
-import NoteBook.Exception.NoteBookLoadException;
-import NoteBook.Exception.PropFileLoadException;
-import NoteBook.Exception.ValidateException;
+import NoteBook.Exception.*;
 import NoteBook.IDGen.SimpleIDGen;
 import NoteBook.RecordStore.FileStore;
 
@@ -32,14 +29,15 @@ public class NoteBookProj {
 
     public void init() throws PropFileLoadException {
 
-        PropsLoader propsLoader = new PropsLoader();
+        PropsLoader propsLoader = new PropsLoader("config.properties");
         String fileName = propsLoader.loadPropFromConfig("filename");
         view = new ConsoleView();
+
         noteBookService = new NoteBookService(new NoteBook(), new SimpleIDGen(), new FileStore(fileName), view);
 
         try {
             noteBookService.init();
-        } catch (NoteBookLoadException ex) {
+        } catch (WorkWithFileException ex) {
             view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }
@@ -63,6 +61,11 @@ public class NoteBookProj {
                 view.showErrorMessage("Команда не выбрана");
                 commandInit.createCommand(commandMap.get("help"), params).execute();
                 return;
+            }
+
+            Class commandClass = commandMap.get(args[0]);
+            if(commandClass == null) {
+                throw new IllegalCommandParamException(null, args[0]);
             }
 
             Command command = commandInit.createCommand(commandMap.get(args[0]), params);

@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class NoteBookService {
 
-    private Logger logger = LoggerFactory.getLogger(NoteBook.class);
+    private Logger logger = LoggerFactory.getLogger(NoteBookService.class);
     private IDGen idGen;
     private RecordStore recordStore;
     private View view;
@@ -93,11 +93,7 @@ public class NoteBookService {
         }
     }
 
-    public NoteBook getNoteBook() {
-        return noteBook;
-    }
-
-    public void setNoteBook(NoteBook noteBook) {
-        this.noteBook = noteBook;
+    public void setLogger(Logger logger) {
+        this.logger = logger;
     }
 }

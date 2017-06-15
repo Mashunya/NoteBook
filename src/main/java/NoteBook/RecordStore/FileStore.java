@@ -13,16 +13,21 @@ import java.util.ArrayList;
 public class FileStore implements RecordStore {
 
     private String fileName;
+    private FileInputStream fileIn;
+    private FileOutputStream fileOut;
+
+    public FileStore(){}
 
     public FileStore(String fileName) {
         this.fileName = fileName;
     }
 
+    //TODO: используется FileInput(Output)Stream, который нельзя вынести в конструктор или устанавливать с помощью set (есть close)
     @Override
     public ArrayList<Record> loadAllRecords() throws NoteBookLoadException {
         ArrayList<Record> records;
         try {
-            FileInputStream fileIn = new FileInputStream(fileName);
+            fileIn = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             records = (ArrayList<Record>) in.readObject();
             in.close();
@@ -36,14 +41,22 @@ public class FileStore implements RecordStore {
     @Override
     public void saveAllRecords(ArrayList<Record> records) throws SaveRecordsException {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+            fileOut = new FileOutputStream(fileName);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOut);
             outputStream.writeObject(records);
             outputStream.close();
-            fileOutputStream.close();
+            fileOut.close();
         } catch (IOException ex) {
             throw new SaveRecordsException(ex);
         }
+    }
 
+    //TODO: можно ли добавлять методы, которые нужны только для написания тестов?
+    public void setFileIn(FileInputStream fileIn) {
+        this.fileIn = fileIn;
+    }
+
+    public void setFileOut(FileOutputStream fileOut) {
+        this.fileOut = fileOut;
     }
 }

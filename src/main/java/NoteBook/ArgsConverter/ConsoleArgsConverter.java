@@ -31,15 +31,18 @@ public class ConsoleArgsConverter {
 
         for(int i = 1; i < args.length; i++) {
             buffer = args[i].split("=");
+            if(buffer.length == 1) {
+                throw new IllegalCommandParamException(null, buffer[0]);
+            }
             oldFieldName = buffer[0];
             fieldValue = buffer[1];
 
             newFieldName = paramConvertMap.get(oldFieldName);
             if(newFieldName == null) {
                 throw new IllegalCommandParamException(null, oldFieldName);
-            } else {
-                convertedParams.put(newFieldName, fieldValue);
             }
+
+            convertedParams.put(newFieldName, fieldValue);
         }
 
         return convertedParams;

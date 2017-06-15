@@ -11,14 +11,14 @@ public class FindByIDCommand extends Command {
 
     @Required
     @NotNegative
-    private int recordID;
-
-    public FindByIDCommand() {
-        this.logger = LoggerFactory.getLogger(FindByIDCommand.class);
-    }
+    private Integer recordID;
 
     @Override
     public void execute() {
         noteBookService.findByID(recordID);
+    }
+
+    public Integer getRecordID() {
+        return recordID;
     }
 }

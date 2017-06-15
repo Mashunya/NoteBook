@@ -8,6 +8,7 @@ import NoteBook.Validators.Required;
 import NoteBook.Validators.NotNegative;
 import NoteBook.Validators.NotNegativeNumberValidator;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import java.util.Map;
  */
 public class CommandInit {
 
+    //TODO: createCommand вызывает initParams и validate, если проверили их нужно ли проверять createCommand
     public Command createCommand(Class commandClass, Map<String, String> params) throws IllegalCommandParamException, ValidateException {
         Command command = null;
         try {
@@ -39,7 +41,7 @@ public class CommandInit {
                 Field field = commandClass.getDeclaredField((String)param.getKey());
                 field.setAccessible(true);
 
-                if(field.getType() == int.class) {
+                if(field.getType() == Integer.class) {
                     fieldValue = integerParser.parse(fieldValue);
                 }
 
@@ -50,6 +52,8 @@ public class CommandInit {
         }
     }
 
+    //TODO: нужно проверять для всех классов команд или можно проверить для одного (например, DeleteCommand), где есть все аннотации?
+    //TODO: классы ..Validator уже проверены, можно заменить на mock, но для этого их нужно вынести в поля класса, нужно ли это?
     public void validate(Command command) throws ValidateException {
 
         NotNullValidator notNullValidator = new NotNullValidator();

@@ -24,6 +24,6 @@ public class ConsoleView implements View {
                 "Author: " + record.getAuthor() + "\n" +
                 "Type: " + record.getType() + "\n" +
                 "CreatedDate: " + record.getCreatedDate().toString() + "\n" +
-                "UpdateDate: " + record.getUpdatedDate().toString());
+                "UpdateDate: " + record.getUpdatedDate().toString() + "\n");
     }
 }

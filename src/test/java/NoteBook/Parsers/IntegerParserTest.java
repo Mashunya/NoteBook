@@ -16,7 +16,7 @@ public class IntegerParserTest {
     public void parse_integerFormatString() {
         IntegerParser parser = new IntegerParser();
         int result = parser.parse("123");
-        assertEquals(result, 123);
+        assertEquals(123, result);
     }
 
     @Test(expected = NumberFormatException.class)

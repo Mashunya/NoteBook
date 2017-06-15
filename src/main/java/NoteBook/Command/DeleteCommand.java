@@ -11,14 +11,18 @@ public class DeleteCommand extends Command {
 
     @Required
     @NotNegative
-    private int recordID;
-
-    public DeleteCommand() {
-        this.logger = LoggerFactory.getLogger(DeleteCommand.class);
-    }
+    private Integer recordID;
 
     @Override
     public void execute() {
         noteBookService.deleteRecord(recordID);
+    }
+
+    public void setRecordID(int recordID) {
+        this.recordID = recordID;
+    }
+
+    public Integer getRecordID() {
+        return recordID;
     }
 }

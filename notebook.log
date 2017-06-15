@@ -315,3 +315,19 @@ NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: 
 	at NoteBook.ArgsConverter.ConsoleArgsConverter.convert(ConsoleArgsConverter.java:39) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:60) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:88) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+2017-06-14_09:50:37.455 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: findByID
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: findByID
+	at NoteBook.ArgsConverter.ConsoleArgsConverter.convert(ConsoleArgsConverter.java:35) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:58) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:86) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+2017-06-14_09:50:50.369 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: findByID
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: findByID
+	at NoteBook.ArgsConverter.ConsoleArgsConverter.convert(ConsoleArgsConverter.java:35) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:58) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:86) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+2017-06-14_09:51:38.308 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: -12
+NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: -12
+	at NoteBook.ArgsConverter.ConsoleArgsConverter.convert(ConsoleArgsConverter.java:35) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:58) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.NoteBookProj.main(NoteBookProj.java:86) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+2017-06-14_09:57:07.258 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: -12 не найдена

@@ -10,12 +10,19 @@ import java.util.Properties;
  * Created by Маша on 09.06.2017.
  */
 public class PropsLoader {
+
+    private String filename;
+
+    public PropsLoader(String filename) {
+        this.filename = filename;
+    }
+
     public String loadPropFromConfig(String propName) throws PropFileLoadException {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         InputStream fis;
         Properties properties = new Properties();
         try {
-            fis = loader.getResourceAsStream("config.properties");
+            fis = loader.getResourceAsStream(filename);
             properties.load(fis);
             return properties.getProperty(propName);
         } catch (IOException ex) {
