@@ -3,6 +3,8 @@ package NoteBook.Command;
 import NoteBook.Services.NoteBookService;
 import NoteBook.View.View;
 
+import java.util.Map;
+
 /**
  * Created by Маша on 08.06.2017.
  */
@@ -20,4 +22,6 @@ public abstract class Command {
     }
 
     public abstract void execute();
+
+    public abstract Command newCommand(Map<String, Object> preparedParams);
 }

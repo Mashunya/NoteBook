@@ -1,26 +1,37 @@
 package NoteBook.Command;
 
 import NoteBook.Entity.Record;
-import NoteBook.Validators.Required;
+
+import java.util.Map;
 
 /**
  * Created by Маша on 08.06.2017.
  */
 public class AddCommand extends Command {
 
-    @Required
     private String text;
+    private String author;
+    private String type;
+    private String title;
 
-    private String author = "";
+    public AddCommand(){}
 
-    private String type = "";
-
-    private String title = "";
+    public AddCommand(Map<String, Object> preparedParams) {
+        this.text = (String)preparedParams.get("text");
+        this.author = (String)preparedParams.get("author");
+        this.type = (String)preparedParams.get("type");
+        this.title = (String)preparedParams.get("title");
+    };
 
     @Override
     public void execute() {
-        Record record = new Record(text, author, title, type); //TODO: нужно ли тестировать?
+        Record record = new Record(text, author, title, type);
         noteBookService.addRecord(record);
+    }
+
+    @Override
+    public Command newCommand(Map<String, Object> preparedParams) {
+        return new AddCommand(preparedParams);
     }
 
     public String getText() {

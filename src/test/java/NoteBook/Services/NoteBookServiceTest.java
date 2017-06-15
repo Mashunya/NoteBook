@@ -125,6 +125,4 @@ public class NoteBookServiceTest {
         verify(view).showErrorMessage(anyString());
         verify(logger).error(anyString(), any(Exception.class));
     }
-
-    //TODO: доделать для остальных команд
 }

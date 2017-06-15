@@ -1,7 +1,6 @@
 package NoteBook.Validators;
 
-import NoteBook.Exception.NullObjectValidateException;
-import NoteBook.Exception.ValidateException;
+import NoteBook.Exception.RequiredParamValidateException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -13,13 +12,13 @@ import org.junit.runners.JUnit4;
 public class NotNullValidatorTest {
 
     @Test
-    public void validate_notNullObject() throws NullObjectValidateException {
+    public void validate_notNullObject() throws RequiredParamValidateException {
         NotNullValidator notNullValidator = new NotNullValidator();
         notNullValidator.validate(new String("test"));
     }
 
-    @Test(expected = NullObjectValidateException.class)
-    public void validate_nullObject() throws NullObjectValidateException {
+    @Test(expected = RequiredParamValidateException.class)
+    public void validate_nullObject() throws RequiredParamValidateException {
         NotNullValidator notNullValidator = new NotNullValidator();
         notNullValidator.validate(null);
     }

@@ -22,7 +22,6 @@ public class FileStore implements RecordStore {
         this.fileName = fileName;
     }
 
-    //TODO: используется FileInput(Output)Stream, который нельзя вынести в конструктор или устанавливать с помощью set (есть close)
     @Override
     public ArrayList<Record> loadAllRecords() throws NoteBookLoadException {
         ArrayList<Record> records;
@@ -51,7 +50,6 @@ public class FileStore implements RecordStore {
         }
     }
 
-    //TODO: можно ли добавлять методы, которые нужны только для написания тестов?
     public void setFileIn(FileInputStream fileIn) {
         this.fileIn = fileIn;
     }

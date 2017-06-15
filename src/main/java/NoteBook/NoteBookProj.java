@@ -25,7 +25,6 @@ public class NoteBookProj {
 
     private NoteBookService noteBookService;
     private View view;
-    private Map<String, Class> commandMap = new HashMap<>();
 
     public void init() throws PropFileLoadException {
 
@@ -41,39 +40,30 @@ public class NoteBookProj {
             view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }
-
-        commandMap.put("add", AddCommand.class);
-        commandMap.put("delete", DeleteCommand.class);
-        commandMap.put("findAll", FindAllCommand.class);
-        commandMap.put("findByID", FindByIDCommand.class);
-        commandMap.put("help", HelpCommand.class);
     }
 
     public void workWithNoteBook(String[] args) {
 
         ConsoleArgsConverter argsConverter = new ConsoleArgsConverter();
-        CommandInit commandInit = new CommandInit();
+        CommandFactory commandFactory = new CommandFactory();
 
         try {
             Map<String, String> params = argsConverter.convert(args);
 
+            String commandName;
             if (args.length == 0) {
                 view.showErrorMessage("Команда не выбрана");
-                commandInit.createCommand(commandMap.get("help"), params).execute();
-                return;
+                commandName = "help";
+            } else {
+                commandName = args[0];
             }
 
-            Class commandClass = commandMap.get(args[0]);
-            if(commandClass == null) {
-                throw new IllegalCommandParamException(null, args[0]);
-            }
-
-            Command command = commandInit.createCommand(commandMap.get(args[0]), params);
+            Command command = commandFactory.createCommand(commandName, params);
             command.setNoteBookService(noteBookService);
             command.setView(view);
             command.execute();
 
-        } catch(IllegalCommandParamException | ValidateException ex) {
+        } catch(IllegalCommandParamException | ValidateException | ParseException ex) {
             view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
         }
