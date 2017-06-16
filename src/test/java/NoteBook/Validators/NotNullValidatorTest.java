@@ -11,15 +11,15 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class NotNullValidatorTest {
 
-    @Test
-    public void validate_notNullObject() throws RequiredParamValidateException {
-        NotNullValidator notNullValidator = new NotNullValidator();
-        notNullValidator.validate(new String("test"));
-    }
-
-    @Test(expected = RequiredParamValidateException.class)
-    public void validate_nullObject() throws RequiredParamValidateException {
-        NotNullValidator notNullValidator = new NotNullValidator();
-        notNullValidator.validate(null);
-    }
+//    @Test
+//    public void validate_notNullObject() throws RequiredParamValidateException {
+//        NotNullValidator notNullValidator = new NotNullValidator();
+//        notNullValidator.validate(new String("test"));
+//    }
+//
+//    @Test(expected = RequiredParamValidateException.class)
+//    public void validate_nullObject() throws RequiredParamValidateException {
+//        NotNullValidator notNullValidator = new NotNullValidator();
+//        notNullValidator.validate(null);
+//    }
 }

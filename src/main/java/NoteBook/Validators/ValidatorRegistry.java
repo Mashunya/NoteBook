@@ -12,8 +12,9 @@ public class ValidatorRegistry {
 
     private ValidatorRegistry() {
         validatorMap = new HashMap<>();
-        validatorMap.put("NotNull", new NotNullValidator());
+        validatorMap.put("Required", new RequiredValidator());
         validatorMap.put("NotNegativeNumber", new NotNegativeNumberValidator());
+        validatorMap.put("StringLength", new StringLengthValidator());
     }
 
     public static ValidatorRegistry getInstance() {

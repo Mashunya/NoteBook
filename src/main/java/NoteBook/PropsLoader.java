@@ -4,6 +4,8 @@ import NoteBook.Exception.PropFileLoadException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -17,7 +19,24 @@ public class PropsLoader {
         this.filename = filename;
     }
 
-    public String loadPropFromConfig(String propName) throws PropFileLoadException {
+    public Map<String, String> loadAllProps() throws PropFileLoadException {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        InputStream fis;
+        Properties properties = new Properties();
+        Map<String, String> propsMap = new HashMap<>();
+        try {
+            fis = loader.getResourceAsStream(filename);
+            properties.load(fis);
+            for (String name: properties.stringPropertyNames()) {
+                propsMap.put(name, properties.getProperty(name));
+            }
+            return propsMap;
+        } catch (IOException ex) {
+            throw new PropFileLoadException(ex);
+        }
+    }
+
+    public String loadProp(String propName) throws PropFileLoadException {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         InputStream fis;
         Properties properties = new Properties();

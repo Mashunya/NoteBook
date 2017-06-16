@@ -16,14 +16,14 @@ public class PropsLoaderTest {
     @Test
     public void loadPropFromConfig_existProp() throws PropFileLoadException {
         PropsLoader propsLoader = new PropsLoader("config.properties");
-        String propValue = propsLoader.loadPropFromConfig("filename");
+        String propValue = propsLoader.loadProp("filename");
         assertNotNull(propValue);
     }
 
     @Test
     public void loadPropFromConfig_notExistProp() throws PropFileLoadException {
         PropsLoader propsLoader = new PropsLoader("config.properties");
-        String propValue = propsLoader.loadPropFromConfig("notExist");
+        String propValue = propsLoader.loadProp("notExist");
         assertNull(propValue);
     }
 }

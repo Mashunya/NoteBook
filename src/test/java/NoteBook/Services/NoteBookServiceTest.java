@@ -1,5 +1,6 @@
 package NoteBook.Services;
 
+import NoteBook.Command.CommandResult.CommandResult;
 import NoteBook.Entity.NoteBook;
 import NoteBook.Entity.Record;
 import NoteBook.Exception.SaveRecordsException;
@@ -45,14 +46,14 @@ public class NoteBookServiceTest {
     @Test
     public void addRecord_allRight() {
 
-        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore, view);
+        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore);
         noteBookService.setLogger(logger);
 
         Record record = new Record("text", "author", "", "");
 
         noteBookService.addRecord(record);
 
-        verify(view).showInfoMessage("Запись успешно добавлена");
+        verify(view).show("Запись успешно добавлена", CommandResult.SUCCESS);
         verify(logger).info("Запись успешно добавлена");
     }
 
@@ -61,14 +62,14 @@ public class NoteBookServiceTest {
 
         doThrow(SaveRecordsException.class).when(recordStore).saveAllRecords(any(ArrayList.class));
 
-        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore, view);
+        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore);
         noteBookService.setLogger(logger);
 
         Record record = new Record("text", "author", "", "");
 
         noteBookService.addRecord(record);
 
-        verify(view).showErrorMessage(anyString());
+        verify(view).show(anyString(), CommandResult.SUCCESS);
         verify(logger).error(anyString(), any(Exception.class));
     }
 
@@ -80,12 +81,12 @@ public class NoteBookServiceTest {
 
         when(record.getRecordID()).thenReturn(0);
 
-        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore, view);
+        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore);
         noteBookService.setLogger(logger);
 
         noteBookService.deleteRecord(0);
 
-        verify(view).showInfoMessage("Запись c ID: 0 успешно удалена");
+        verify(view).show("Запись c ID: 0 успешно удалена", CommandResult.SUCCESS);
         verify(logger).info("Запись c ID: 0 успешно удалена");
     }
 
@@ -97,12 +98,12 @@ public class NoteBookServiceTest {
 
         when(record.getRecordID()).thenReturn(1);
 
-        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore, view);
+        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore);
         noteBookService.setLogger(logger);
 
         noteBookService.deleteRecord(0);
 
-        verify(view).showInfoMessage("Запись c ID: 0 не найдена");
+        verify(view).show("Запись c ID: 0 не найдена", CommandResult.WARNING);
         verify(logger).warn("DeleteRecord: запись c ID: 0 не найдена");
     }
 
@@ -117,12 +118,12 @@ public class NoteBookServiceTest {
 
         doThrow(SaveRecordsException.class).when(recordStore).saveAllRecords(any(ArrayList.class));
 
-        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore, view);
+        NoteBookService noteBookService = new NoteBookService(noteBook, idGen, recordStore);
         noteBookService.setLogger(logger);
 
         noteBookService.deleteRecord(0);
 
-        verify(view).showErrorMessage(anyString());
+        verify(view).show(anyString(), CommandResult.ERROR);
         verify(logger).error(anyString(), any(Exception.class));
     }
 }

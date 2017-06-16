@@ -1,5 +1,6 @@
 package NoteBook.Services;
 
+import NoteBook.Command.CommandResult.CommandResult;
 import NoteBook.Entity.NoteBook;
 import NoteBook.Entity.Record;
 import NoteBook.Exception.NoteBookLoadException;
@@ -21,68 +22,62 @@ public class NoteBookService {
     private Logger logger = LoggerFactory.getLogger(NoteBookService.class);
     private IDGen idGen;
     private RecordStore recordStore;
-    private View view;
 
     private NoteBook noteBook;
 
-    public NoteBookService(NoteBook noteBook, IDGen idGen, RecordStore recordStore, View view) {
+    public NoteBookService(NoteBook noteBook, IDGen idGen, RecordStore recordStore) {
         this.noteBook = noteBook;
         this.idGen = idGen;
         this.recordStore = recordStore;
-        this.view = view;
     }
 
-    public void addRecord(Record record) {
+    public CommandResult addRecord(Record record) {
         record.setRecordID(idGen.getNextID());
         noteBook.getRecords().add(record);
         try {
             recordStore.saveAllRecords(noteBook.getRecords());
-            view.showInfoMessage("Запись успешно добавлена");
             logger.info("Запись успешно добавлена");
+            return new CommandResult("Запись успешно добавлена", CommandResult.SUCCESS);
         } catch(SaveRecordsException ex) {
-            view.showErrorMessage(ex.getMessage());
             logger.error(ex.getMessage(), ex);
+            return new CommandResult(ex.getMessage(), CommandResult.ERROR);
         }
     }
 
-    public void deleteRecord(int recordID) {
+    public CommandResult deleteRecord(int recordID) {
         for(Record record: noteBook.getRecords()) {
             if(record.getRecordID() == recordID) {
                 noteBook.getRecords().remove(record);
                 try {
                     recordStore.saveAllRecords(noteBook.getRecords());
-                    view.showInfoMessage("Запись c ID: " + recordID + " успешно удалена");
                     logger.info("Запись c ID: " + recordID + " успешно удалена");
+                    return new CommandResult("Запись c ID: " + recordID + " успешно удалена", CommandResult.SUCCESS);
                 } catch (SaveRecordsException ex) {
-                    view.showErrorMessage(ex.getMessage());
                     logger.error(ex.getMessage(), ex);
+                    return new CommandResult(ex.getMessage(), CommandResult.ERROR);
                 }
-                return;
             }
         }
-        view.showInfoMessage("Запись c ID: " + recordID + " не найдена");
         logger.warn("DeleteRecord: запись c ID: " + recordID + " не найдена");
+        return new CommandResult("Запись c ID: " + recordID + " не найдена", CommandResult.WARNING);
     }
 
-    public void findAll() {
+    public CommandResult findAll() {
         if(noteBook.getRecords().size() == 0) {
-            view.showInfoMessage("Не создано ни одной записи");
             logger.warn("FindAll: не создано ни одной записи");
+            return new CommandResult("Не создано ни одной записи", CommandResult.WARNING);
         }
-        for(Record record: noteBook.getRecords()) {
-            view.showRecord(record);
-        }
+        return new CommandResult(noteBook.getRecords(), CommandResult.SUCCESS);
     }
 
-    public void findByID(int recordID) {
+    public CommandResult findByID(int recordID) {
         for(Record record: noteBook.getRecords()) {
             if(record.getRecordID() == recordID) {
-                view.showRecord(record);
-                return;
+                return new CommandResult(record, CommandResult.SUCCESS);
             }
         }
-        view.showInfoMessage("Запись c ID: " + recordID + " не найдена");
         logger.warn("FindByID: запись c ID: " + recordID + " не найдена");
+        return new CommandResult("Запись c ID: " + recordID + " не найдена", CommandResult.WARNING);
     }
 
     public void init() throws NoteBookLoadException {

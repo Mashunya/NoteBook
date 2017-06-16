@@ -12,16 +12,16 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnit4.class)
 public class ParamParserTest {
 
-    @Test
-    public void parse_integerFormatString() {
-        ParamParser parser = new ParamParser();
-        int result = parser.parse("123");
-        assertEquals(123, result);
-    }
-
-    @Test(expected = NumberFormatException.class)
-    public void parse_notIntegerFormatString() {
-        ParamParser parser = new ParamParser();
-        parser.parse("abc");
-    }
+//    @Test
+//    public void parse_integerFormatString() {
+//        ParamParser parser = new ParamParser();
+//        int result = parser.parse("123");
+//        assertEquals(123, result);
+//    }
+//
+//    @Test(expected = NumberFormatException.class)
+//    public void parse_notIntegerFormatString() {
+//        ParamParser parser = new ParamParser();
+//        parser.parse("abc");
+//    }
 }

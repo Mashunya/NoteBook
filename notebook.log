@@ -28,7 +28,7 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 2017-06-09_16:33:29.551 [main] ERROR NoteBook.Entity.NoteBook - Количесво аргументов массива меньше ожидаемого
 NoteBook.Exception.ArrLengthValidateException: Количесво аргументов массива меньше ожидаемого
 	at NoteBook.Validators.ArrLengthValidator.validate(ArrLengthValidator.java:11) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
-	at NoteBook.Command.AddCommand.execute(AddCommand.java:26) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.AddCommand.execute(AddCommand.java:26) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:54) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:62) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 2017-06-09_16:36:40.637 [main] ERROR NoteBook.Entity.NoteBook - При загрузке файла с записями произошла ошибка. Записи не были загружены. Файл будет создан
@@ -73,10 +73,10 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 	at NoteBook.RecordStore.FileStore.loadAllRecords(FileStore.java:25) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	... 3 common frames omitted
 2017-06-09_17:07:59.427 [main] INFO  NoteBook.Entity.NoteBook - Запись first record успешно добавлена
-2017-06-09_17:08:24.543 [main] ERROR NoteBook.Command.FindByIDCommand - Количесво аргументов массива меньше ожидаемого
+2017-06-09_17:08:24.543 [main] ERROR NoteBook.Command.Command.FindByIDCommand - Количесво аргументов массива меньше ожидаемого
 NoteBook.Exception.ArrLengthValidateException: Количесво аргументов массива меньше ожидаемого
 	at NoteBook.Validators.ArrLengthValidator.validate(ArrLengthValidator.java:11) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
-	at NoteBook.Command.FindByIDCommand.execute(FindByIDCommand.java:29) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.FindByIDCommand.execute(FindByIDCommand.java:29) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:53) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 2017-06-09_17:08:36.853 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 2 не найдена
@@ -87,10 +87,10 @@ NoteBook.Exception.ArrLengthValidateException: Количесво аргументов массива мень
 2017-06-12_08:55:16.841 [main] INFO  NoteBook.Entity.NoteBook - Запись fifth record успешно добавлена
 2017-06-12_08:55:43.883 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 8 не найдена
 2017-06-12_08:55:51.029 [main] WARN  NoteBook.Entity.NoteBook - FindByID: запись c ID: 5 не найдена
-2017-06-12_09:02:41.047 [main] ERROR NoteBook.Command.FindByIDCommand - При преобразовании строки к неотрицаельному целому числу произошла ошибка
+2017-06-12_09:02:41.047 [main] ERROR NoteBook.Command.Command.FindByIDCommand - При преобразовании строки к неотрицаельному целому числу произошла ошибка
 NoteBook.Exception.NegativeNumberException: При преобразовании строки к неотрицаельному целому числу произошла ошибка
 	at NoteBook.Validators.NotNegativeNumberValidator.validate(ZeroOrNaturalNumberValidator.java:16) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
-	at NoteBook.Command.FindByIDCommand.execute(FindByIDCommand.java:30) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.FindByIDCommand.execute(FindByIDCommand.java:30) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:58) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:70) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 2017-06-13_10:20:25.102 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
@@ -172,12 +172,12 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 	... 3 common frames omitted
 2017-06-13_10:25:17.704 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды
 NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды
-	at NoteBook.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 Caused by: java.lang.NoSuchFieldException: text
 	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
-	at NoteBook.Command.Command.initParams(Command.java:37) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:37) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	... 2 common frames omitted
 2017-06-13_10:29:06.668 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
 NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
@@ -194,12 +194,12 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 	... 3 common frames omitted
 2017-06-13_10:29:06.717 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
 NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
-	at NoteBook.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 Caused by: java.lang.NoSuchFieldException: text
 	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
-	at NoteBook.Command.Command.initParams(Command.java:37) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:37) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	... 2 common frames omitted
 2017-06-13_10:30:39.034 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
 NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
@@ -216,12 +216,12 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 	... 3 common frames omitted
 2017-06-13_10:30:39.062 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
 NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
-	at NoteBook.Command.Command.initParams(Command.java:46) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:46) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 Caused by: java.lang.NoSuchFieldException: text
 	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
-	at NoteBook.Command.Command.initParams(Command.java:38) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:38) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	... 2 common frames omitted
 2017-06-13_10:32:43.377 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
 NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
@@ -238,12 +238,12 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 	... 3 common frames omitted
 2017-06-13_10:32:43.459 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
 NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
-	at NoteBook.Command.Command.initParams(Command.java:51) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:51) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 Caused by: java.lang.NoSuchFieldException: text
 	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
-	at NoteBook.Command.Command.initParams(Command.java:43) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:43) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	... 2 common frames omitted
 2017-06-13_10:34:50.455 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
 NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
@@ -260,12 +260,12 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 	... 3 common frames omitted
 2017-06-13_10:34:50.481 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
 NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
-	at NoteBook.Command.Command.initParams(Command.java:47) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:47) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 Caused by: java.lang.NoSuchFieldException: text
 	at java.lang.Class.getField(Unknown Source) ~[na:1.8.0_131]
-	at NoteBook.Command.Command.initParams(Command.java:38) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:38) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	... 2 common frames omitted
 2017-06-13_10:38:54.876 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
 NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка
@@ -282,15 +282,15 @@ Caused by: java.io.FileNotFoundException: D:\NoteBook\NoteBook.ser (Не удается н
 	... 3 common frames omitted
 2017-06-13_10:38:55.008 [main] ERROR NoteBook.NoteBookProj - Недопустимый параметр команды: text
 NoteBook.Exception.IllegalCommandParamException: Недопустимый параметр команды: text
-	at NoteBook.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:45) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.workWithNoteBook(NoteBookProj.java:61) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	at NoteBook.NoteBookProj.main(NoteBookProj.java:78) [NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
-Caused by: java.lang.IllegalAccessException: Class NoteBook.Command.Command can not access a member of class NoteBook.Command.AddCommand with modifiers "private"
+Caused by: java.lang.IllegalAccessException: Class NoteBook.Command.Command.Command can not access a member of class NoteBook.Command.Command.AddCommand with modifiers "private"
 	at sun.reflect.Reflection.ensureMemberAccess(Unknown Source) ~[na:1.8.0_131]
 	at java.lang.reflect.AccessibleObject.slowCheckMemberAccess(Unknown Source) ~[na:1.8.0_131]
 	at java.lang.reflect.AccessibleObject.checkAccess(Unknown Source) ~[na:1.8.0_131]
 	at java.lang.reflect.Field.set(Unknown Source) ~[na:1.8.0_131]
-	at NoteBook.Command.Command.initParams(Command.java:43) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
+	at NoteBook.Command.Command.Command.initParams(Command.java:43) ~[NoteBook-1.0-SNAPSHOT-jar-with-dependencies.jar:na]
 	... 2 common frames omitted
 2017-06-13_10:45:17.556 [main] ERROR NoteBook.NoteBookProj - При загрузке сохраненных записей блокнота возникла ошибка
 NoteBook.Exception.NoteBookLoadException: При загрузке сохраненных записей блокнота возникла ошибка

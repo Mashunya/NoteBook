@@ -2,7 +2,6 @@ package NoteBook.ArgsConverter;
 
 import NoteBook.Exception.IllegalCommandParamException;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +21,9 @@ public class ConsoleArgsConverter {
         paramConvertMap.put("rec_ID", "recordID");
     }
 
-    public Map<String, String> convert(String[] args) throws IllegalCommandParamException {
+    public Map<String, Object> convert(String[] args) throws IllegalCommandParamException {
 
-        Map<String, String> convertedParams = new HashMap<>();
+        Map<String, Object> convertedParams = new HashMap<>();
 
         String oldFieldName, newFieldName, fieldValue;
         String[] buffer;

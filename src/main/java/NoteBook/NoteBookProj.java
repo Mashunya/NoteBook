@@ -1,21 +1,24 @@
 package NoteBook;
 
 import NoteBook.ArgsConverter.ConsoleArgsConverter;
+import NoteBook.Command.Command.Command;
+import NoteBook.Command.CommandDescription.CommandDescription;
+import NoteBook.Command.CommandDescription.CommandDescriptionRegistry;
+import NoteBook.Command.CommandFactory.CommandFactory;
+import NoteBook.Command.CommandFactory.CommandFactoryRegistry;
+import NoteBook.Command.CommandResult.CommandResult;
+import NoteBook.Command.InputDataPreparator;
 import NoteBook.Entity.NoteBook;
 import NoteBook.Exception.*;
 import NoteBook.IDGen.SimpleIDGen;
 import NoteBook.RecordStore.FileStore;
-
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-
-import NoteBook.Command.*;
 import NoteBook.Services.NoteBookService;
 import NoteBook.View.ConsoleView;
 import NoteBook.View.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 /**
  * Created by Маша on 08.06.2017.
@@ -29,15 +32,15 @@ public class NoteBookProj {
     public void init() throws PropFileLoadException {
 
         PropsLoader propsLoader = new PropsLoader("config.properties");
-        String fileName = propsLoader.loadPropFromConfig("filename");
+        String fileName = propsLoader.loadProp("filename");
         view = new ConsoleView();
 
-        noteBookService = new NoteBookService(new NoteBook(), new SimpleIDGen(), new FileStore(fileName), view);
+        noteBookService = new NoteBookService(new NoteBook(), new SimpleIDGen(), new FileStore(fileName));
 
         try {
             noteBookService.init();
         } catch (WorkWithFileException ex) {
-            view.showErrorMessage(ex.getMessage());
+            view.show(ex.getMessage(), CommandResult.ERROR);
             logger.error(ex.getMessage(), ex);
         }
     }
@@ -45,26 +48,30 @@ public class NoteBookProj {
     public void workWithNoteBook(String[] args) {
 
         ConsoleArgsConverter argsConverter = new ConsoleArgsConverter();
-        CommandFactory commandFactory = new CommandFactory();
+        CommandFactoryRegistry commandFactoryRegistry = new CommandFactoryRegistry();
 
         try {
-            Map<String, String> params = argsConverter.convert(args);
+            Map<String, Object> params = argsConverter.convert(args);
 
             String commandName;
             if (args.length == 0) {
-                view.showErrorMessage("Команда не выбрана");
+                view.show("Команда не выбрана", CommandResult.ERROR);
                 commandName = "help";
             } else {
                 commandName = args[0];
             }
 
-            Command command = commandFactory.createCommand(commandName, params);
-            command.setNoteBookService(noteBookService);
-            command.setView(view);
-            command.execute();
+            CommandDescription commandDescription = CommandDescriptionRegistry.getInstanse().getCommandDescription(commandName);
 
-        } catch(IllegalCommandParamException | ValidateException | ParseException ex) {
-            view.showErrorMessage(ex.getMessage());
+            InputDataPreparator inputDataPreparator = new InputDataPreparator();
+            Map<String, Object> preparedParams = inputDataPreparator.prepareData(params, commandDescription.getParamsDescription());
+
+            CommandFactory commandFactory = commandFactoryRegistry.getCommandFactory(commandDescription.getCommandClass());
+            Command command = commandFactory.createCommand(noteBookService, preparedParams);
+            view.show(command.execute());
+
+        } catch(IllegalCommandParamException | CommandFactoryException | ValidateException | ParseException ex) {
+            view.show(ex.getMessage(), CommandResult.ERROR);
             logger.error(ex.getMessage(), ex);
         }
     }
@@ -74,13 +81,15 @@ public class NoteBookProj {
     }
 
     public static void main(String[] args) {
+        args = new String[]{"add", "rec_text=qwerty", "rec_title=qwerty"};
+
         NoteBookProj nodeBookProj = new NoteBookProj();
 
         try {
             nodeBookProj.init();
             nodeBookProj.workWithNoteBook(args);
         } catch(PropFileLoadException ex) {
-            nodeBookProj.getView().showErrorMessage(ex.getMessage());
+            nodeBookProj.getView().show(ex.getMessage(), CommandResult.ERROR);
             logger.error(ex.getMessage(), ex);
         }
     }

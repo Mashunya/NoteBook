@@ -1,5 +1,6 @@
 package NoteBook.Command;
 
+import NoteBook.Command.Command.AddCommand;
 import NoteBook.Entity.Record;
 import NoteBook.Services.NoteBookService;
 import org.junit.Test;

@@ -20,7 +20,7 @@ public class ConsoleArgsConverterTest {
     public void convert_allParamsRight() throws IllegalCommandParamException {
         String[] args = {"commandName", "rec_text=some text", "rec_title=some title", "rec_author=some author", "rec_type=some type"};
 
-        Map<String, String> expectedResultMap = new HashMap<>();
+        Map<String, Object> expectedResultMap = new HashMap<>();
         expectedResultMap.put("text", "some text");
         expectedResultMap.put("title", "some title");
         expectedResultMap.put("author", "some author");
@@ -28,7 +28,7 @@ public class ConsoleArgsConverterTest {
 
         ConsoleArgsConverter converter = new ConsoleArgsConverter();
 
-        Map<String, String> resultMap = converter.convert(args);
+        Map<String, Object> resultMap = converter.convert(args);
 
         assertEquals(expectedResultMap, resultMap);
     }
