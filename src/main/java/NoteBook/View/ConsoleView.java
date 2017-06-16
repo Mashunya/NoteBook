@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Маша on 11.06.2017.
  */
-
+//TODO: Think of multiple views (that show data on console) and command can decide which view to use to display it's data
 public class ConsoleView implements View {
 
     @Override

@@ -11,6 +11,7 @@ import java.util.*;
 /**
  * Created by Маша on 08.06.2017.
  */
+//TODO interface with only execute + abstract with only notebookservice for commands that going to use it
 public abstract class Command {
 
     protected NoteBookService noteBookService;
@@ -21,7 +22,7 @@ public abstract class Command {
     }
 
     public abstract List<CommandResult> execute();
-
+//TODO try to use decorator
     public void addProgramNameToResult() {
         try {
             String aboutProgram = "Программа " + GlobalProps.getProps().get("Program_Name") + ", версия " +GlobalProps.getProps().get("Version");
@@ -30,7 +31,7 @@ public abstract class Command {
             results.add(new CommandResult("Не удалось загрузить глобальные параметры", CommandResult.WARNING));
         }
     }
-
+    //TODO try to use decorator
     public void addCheckOSToResult() {
         try {
             String recommendedOS = GlobalProps.getProps().get("Recommended_OS");

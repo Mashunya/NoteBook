@@ -17,10 +17,12 @@ public class ParamDescription {
     private boolean required;
     private List<Validator> validators;
     private Object defaultValue;
+    // TODO: max? min?
     private int stringLength;
 
     private ParamDescription() {
         validators = new ArrayList<>();
+        //TODO: COnstanst or enum?
         validators.add(ValidatorRegistry.getInstance().getValidator("Required"));
         validators.add(ValidatorRegistry.getInstance().getValidator("StringLength"));
     }

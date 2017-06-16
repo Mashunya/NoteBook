@@ -2,6 +2,7 @@ package NoteBook.Command.CommandFactory;
 
 import NoteBook.Command.Command.AddCommand;
 import NoteBook.Command.Command.Command;
+import NoteBook.Command.Command.DecoratorCommand;
 import NoteBook.Services.NoteBookService;
 
 import java.util.Map;
@@ -22,8 +23,9 @@ public class AddCommandFactory implements CommandFactory {
         addCommand.setAuthor((String)commandParams.get("author"));
         addCommand.setTitle((String)commandParams.get("title"));
         addCommand.setType((String)commandParams.get("type"));
+        addCommand.setGlobalParams(Map);
 
-        return addCommand;
+        return new DecoratorCommand(addCommand);
     }
 
     public static Class getCommandClass() {

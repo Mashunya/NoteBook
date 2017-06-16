@@ -67,7 +67,7 @@ public class NoteBookProj {
             Map<String, Object> preparedParams = inputDataPreparator.prepareData(params, commandDescription.getParamsDescription());
 
             CommandFactory commandFactory = commandFactoryRegistry.getCommandFactory(commandDescription.getCommandClass());
-            Command command = commandFactory.createCommand(noteBookService, preparedParams);
+            Command command = commandFactory.createCommand(noteBookService, preparedParams, globalParams);
             view.show(command.execute());
 
         } catch(IllegalCommandParamException | CommandFactoryException | ValidateException | ParseException ex) {

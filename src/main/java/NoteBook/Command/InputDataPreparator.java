@@ -22,6 +22,7 @@ public class InputDataPreparator {
         for(ParamDescription paramDescription: paramsDescription) {
             String paramName = paramDescription.getParamName();
             Object paramValue = params.get(paramName);
+            //TODO registry?
             if(paramDescription.getParamClass().equals(Integer.class)) {
                 params.put(paramName, new IntParser().parse(paramValue));
             }
@@ -38,7 +39,7 @@ public class InputDataPreparator {
             }
         }
     }
-
+// TODO: name should mention default value processign
     private void initParams() {
         for(ParamDescription paramDescription: paramsDescription) {
             String paramName = paramDescription.getParamName();
@@ -51,6 +52,7 @@ public class InputDataPreparator {
 
     public Map<String, Object> prepareData(Map<String, Object> inputParams,
                                            Collection<ParamDescription> paramsDescription) throws ValidateException, ParseException {
+        // TODO: pass as params to functions
         this.paramsDescription = paramsDescription;
         this.params = inputParams;
 
