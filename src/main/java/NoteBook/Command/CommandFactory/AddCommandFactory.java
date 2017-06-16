@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public class AddCommandFactory implements CommandFactory {
 
+    public static Class commandClass = AddCommand.class;
+
     @Override
     public Command createCommand(NoteBookService noteBookService, Map<String, Object> commandParams) {
         AddCommand addCommand = new AddCommand();
@@ -22,5 +24,9 @@ public class AddCommandFactory implements CommandFactory {
         addCommand.setType((String)commandParams.get("type"));
 
         return addCommand;
+    }
+
+    public static Class getCommandClass() {
+        return commandClass;
     }
 }

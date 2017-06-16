@@ -1,15 +1,15 @@
 package NoteBook.Command.CommandDescription;
 
-import NoteBook.Command.Command.DeleteCommand;
+import NoteBook.Command.Command.FindByIDCommand;
 import NoteBook.Command.ParamDescription.ParamDescription;
 import NoteBook.Validators.ValidatorRegistry;
 
 /**
- * Created by Маша on 15.06.2017.
+ * Created by Маша on 16.06.2017.
  */
-public class DeleteCommandDescription extends CommandDescription {
-    public DeleteCommandDescription(String commandName) {
-        super(commandName, DeleteCommand.class);
+public class FindByIDCommandDescription extends CommandDescription {
+    public FindByIDCommandDescription(String commandName) {
+        super(commandName, FindByIDCommand.class);
 
         ParamDescription.Builder builder;
 

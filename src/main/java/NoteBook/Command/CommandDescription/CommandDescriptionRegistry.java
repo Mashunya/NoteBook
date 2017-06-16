@@ -16,9 +16,10 @@ public class CommandDescriptionRegistry {
         commandDescriptionMap = new HashMap<>();
         commandDescriptionMap.put("add", new AddCommandDescription("add"));
         commandDescriptionMap.put("delete", new DeleteCommandDescription("delete"));
-//        commandDescriptionMap.put("findAll", new FindAllCommand());
-//        commandDescriptionMap.put("findByID", new FindByIDCommand());
-//        commandDescriptionMap.put("help", new HelpCommand());
+        commandDescriptionMap.put("findAll", new FindAllCommandDescription("findAll"));
+        commandDescriptionMap.put("findByID", new FindByIDCommandDescription("findByID"));
+        commandDescriptionMap.put("help", new HelpCommandDescription("help"));
+        commandDescriptionMap.put("about", new AboutCommandDescription("about"));
     }
 
     public static CommandDescriptionRegistry getInstanse() {

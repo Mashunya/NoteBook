@@ -81,7 +81,7 @@ public class NoteBookProj {
     }
 
     public static void main(String[] args) {
-        args = new String[]{"add", "rec_text=qwerty", "rec_title=qwerty"};
+        args = new String[]{"help", "rec_ID=1"};
 
         NoteBookProj nodeBookProj = new NoteBookProj();
 

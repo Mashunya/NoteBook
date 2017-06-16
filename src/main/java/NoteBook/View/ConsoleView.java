@@ -3,6 +3,7 @@ package NoteBook.View;
 import NoteBook.Command.CommandResult.CommandResult;
 import NoteBook.Entity.Record;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class ConsoleView implements View {
             messageClass = message.getClass();
             if(messageClass.equals(Record.class)) {
                 show((Record)message, result.getStatus());
-            } else if(messageClass.equals(List.class)) {
+            } else if(messageClass.equals(ArrayList.class)) {
                 show((List<Record>)message, result.getStatus());
             } else {
                 show(message.toString(), result.getStatus());

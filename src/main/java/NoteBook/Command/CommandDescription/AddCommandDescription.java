@@ -13,15 +13,15 @@ public class AddCommandDescription extends CommandDescription {
         ParamDescription.Builder builder;
 
         builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("text").required(true).build());
+        paramsDescription.add(builder.paramName("text").paramClass(String.class).required(true).build());
 
         builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("author").required(false).defaultValue("anonymous").length(200).build());
+        paramsDescription.add(builder.paramName("author").paramClass(String.class).required(false).defaultValue("anonymous").length(200).build());
 
         builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("type").required(false).defaultValue("no type").length(100).build());
+        paramsDescription.add(builder.paramName("type").paramClass(String.class).required(false).defaultValue("no type").length(100).build());
 
         builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("title").required(false).defaultValue("no title").length(200).build());
+        paramsDescription.add(builder.paramName("title").paramClass(String.class).required(false).defaultValue("no title").length(200).build());
     }
 }

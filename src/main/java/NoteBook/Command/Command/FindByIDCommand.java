@@ -17,7 +17,7 @@ public class FindByIDCommand extends Command {
         return results;
     }
 
-    public Integer getRecordID() {
-        return recordID;
+    public void setRecordID(Integer recordID) {
+        this.recordID = recordID;
     }
 }

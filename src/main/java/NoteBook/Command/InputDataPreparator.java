@@ -22,7 +22,7 @@ public class InputDataPreparator {
         for(ParamDescription paramDescription: paramsDescription) {
             String paramName = paramDescription.getParamName();
             Object paramValue = params.get(paramName);
-            if(paramDescription.getParamClass() == Integer.class) {
+            if(paramDescription.getParamClass().equals(Integer.class)) {
                 params.put(paramName, new IntParser().parse(paramValue));
             }
         }
@@ -54,8 +54,8 @@ public class InputDataPreparator {
         this.paramsDescription = paramsDescription;
         this.params = inputParams;
 
-        validateParams();
         parseParams();
+        validateParams();
         initParams();
 
         return params;
