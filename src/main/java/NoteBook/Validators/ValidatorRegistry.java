@@ -7,14 +7,14 @@ import java.util.Map;
  * Created by Маша on 15.06.2017.
  */
 public class ValidatorRegistry {
-    private Map<String, Validator> validatorMap;
+    private Map<Enum, Validator> validatorMap;
     private static ValidatorRegistry validatorRegistry;
 
     private ValidatorRegistry() {
         validatorMap = new HashMap<>();
-        validatorMap.put("Required", new RequiredValidator());
-        validatorMap.put("NotNegativeNumber", new NotNegativeNumberValidator());
-        validatorMap.put("StringLength", new StringLengthValidator());
+        validatorMap.put(ValidatorNames.Required, new RequiredValidator());
+        validatorMap.put(ValidatorNames.NotNegativeNumber, new NotNegativeNumberValidator());
+        validatorMap.put(ValidatorNames.StringLength, new StringLengthValidator());
     }
 
     public static ValidatorRegistry getInstance() {
@@ -24,7 +24,7 @@ public class ValidatorRegistry {
         return validatorRegistry;
     }
 
-    public Validator getValidator(String validatorName) {
+    public Validator getValidator(Enum validatorName) {
         return validatorMap.get(validatorName);
     }
 }

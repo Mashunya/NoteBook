@@ -2,7 +2,8 @@ package NoteBook.Command.CommandFactory;
 
 import NoteBook.Command.Command.AddCommand;
 import NoteBook.Command.Command.Command;
-import NoteBook.Command.Command.DecoratorCommand;
+import NoteBook.Command.Command.CommandDecorator.AddProgramNameDecorator;
+import NoteBook.Command.Command.CommandDecorator.CheckOSDecorator;
 import NoteBook.Services.NoteBookService;
 
 import java.util.Map;
@@ -15,7 +16,7 @@ public class AddCommandFactory implements CommandFactory {
     public static Class commandClass = AddCommand.class;
 
     @Override
-    public Command createCommand(NoteBookService noteBookService, Map<String, Object> commandParams) {
+    public Command createCommand(NoteBookService noteBookService, Map<String, Object> commandParams, Map<String, String> globalParams) {
         AddCommand addCommand = new AddCommand();
         addCommand.setNoteBookService(noteBookService);
 
@@ -23,9 +24,9 @@ public class AddCommandFactory implements CommandFactory {
         addCommand.setAuthor((String)commandParams.get("author"));
         addCommand.setTitle((String)commandParams.get("title"));
         addCommand.setType((String)commandParams.get("type"));
-        addCommand.setGlobalParams(Map);
+        addCommand.setGlobalParams(globalParams);
 
-        return new DecoratorCommand(addCommand);
+        return new AddProgramNameDecorator(new CheckOSDecorator(addCommand));
     }
 
     public static Class getCommandClass() {

@@ -1,29 +1,43 @@
 package NoteBook.Command.Command;
 
-import NoteBook.Command.CommandResult.CommandResult;
-import NoteBook.Exception.PropFileLoadException;
-import NoteBook.GlobalProps;
+import NoteBook.ModelAndView.Model.Message;
+import NoteBook.ModelAndView.Model.MessageListModel;
+import NoteBook.ModelAndView.Model.Model;
+import NoteBook.ModelAndView.ModelAndView;
 
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Маша on 16.06.2017.
  */
-public class AboutCommand extends Command {
+public class AboutCommand implements Command {
+
+    private Map<String, String> globalParams;
+
     @Override
-    public List<CommandResult> execute() {
-        try {
-            Map<String, String> globalProps = GlobalProps.getProps();
+    public ModelAndView execute() {
+        Model resultModel = new MessageListModel();
+
+        if(globalParams == null) {
+            resultModel.addMessage(new Message("Глобальные параметры не установлены", Message.WARNING));
+        } else {
             String aboutProgram = "Информация о программе:\n";
-            for(Map.Entry prop: globalProps.entrySet()) {
-                aboutProgram += (prop.getKey() + ": " + prop.getValue() + "\n");
-            }
-            results.add(new CommandResult(aboutProgram, CommandResult.INFO));
-        } catch(PropFileLoadException ex) {
-            results.add(new CommandResult("Не удалось загрузить глобальные параметры", CommandResult.ERROR));
+            aboutProgram += ("Название программы: " + globalParams.get("Program_Name") + "\n");
+            aboutProgram += ("Версия: " + globalParams.get("Version") + "\n");
+            aboutProgram += ("Краткое описание: " + globalParams.get("About_Program") + "\n");
+            aboutProgram += ("Автор: " + globalParams.get("Author") + "\n");
+            resultModel.addMessage(new Message(aboutProgram, Message.INFO));
         }
 
-        return results;
+        return new ModelAndView("MessagesView", resultModel);
+    }
+
+    @Override
+    public Map<String, String> getGlobalParams() {
+        return globalParams;
+    }
+
+    public void setGlobalParams(Map<String, String> globalParams) {
+        this.globalParams = globalParams;
     }
 }

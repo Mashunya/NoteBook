@@ -1,18 +1,19 @@
 package NoteBook.Services;
 
-import NoteBook.Command.CommandResult.CommandResult;
 import NoteBook.Entity.NoteBook;
 import NoteBook.Entity.Record;
 import NoteBook.Exception.NoteBookLoadException;
 import NoteBook.Exception.SaveRecordsException;
 import NoteBook.IDGen.IDGen;
 import NoteBook.IDGen.SimpleIDGen;
+import NoteBook.ModelAndView.Model.*;
+import NoteBook.ModelAndView.ModelAndView;
 import NoteBook.RecordStore.RecordStore;
-import NoteBook.View.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Маша on 11.06.2017.
@@ -31,53 +32,68 @@ public class NoteBookService {
         this.recordStore = recordStore;
     }
 
-    public CommandResult addRecord(Record record) {
+    public ModelAndView addRecord(Record record) {
+        Model resultModel = new MessageListModel();
+
         record.setRecordID(idGen.getNextID());
         noteBook.getRecords().add(record);
         try {
             recordStore.saveAllRecords(noteBook.getRecords());
             logger.info("Запись успешно добавлена");
-            return new CommandResult("Запись успешно добавлена", CommandResult.SUCCESS);
+            resultModel.addMessage(new Message("Запись успешно добавлена", Message.SUCCESS));
         } catch(SaveRecordsException ex) {
             logger.error(ex.getMessage(), ex);
-            return new CommandResult(ex.getMessage(), CommandResult.ERROR);
+            resultModel.addMessage(new Message(ex.getMessage(), Message.ERROR));
         }
+        return new ModelAndView("MessagesView", resultModel);
     }
 
-    public CommandResult deleteRecord(int recordID) {
+    public ModelAndView deleteRecord(int recordID) {
+        Model resultModel = new MessageListModel();
         for(Record record: noteBook.getRecords()) {
             if(record.getRecordID() == recordID) {
                 noteBook.getRecords().remove(record);
                 try {
                     recordStore.saveAllRecords(noteBook.getRecords());
                     logger.info("Запись c ID: " + recordID + " успешно удалена");
-                    return new CommandResult("Запись c ID: " + recordID + " успешно удалена", CommandResult.SUCCESS);
+                    resultModel.addMessage(new Message("Запись c ID: " + recordID + " успешно удалена", Message.SUCCESS));
                 } catch (SaveRecordsException ex) {
                     logger.error(ex.getMessage(), ex);
-                    return new CommandResult(ex.getMessage(), CommandResult.ERROR);
+                    resultModel.addMessage(new Message(ex.getMessage(), Message.ERROR));
                 }
+                return new ModelAndView("MessagesModel", resultModel);
             }
         }
         logger.warn("DeleteRecord: запись c ID: " + recordID + " не найдена");
-        return new CommandResult("Запись c ID: " + recordID + " не найдена", CommandResult.WARNING);
+        resultModel.addMessage(new Message("Запись c ID: " + recordID + " не найдена", Message.WARNING));
+        return new ModelAndView("MessagesModel", resultModel);
     }
 
-    public CommandResult findAll() {
-        if(noteBook.getRecords().size() == 0) {
+    public ModelAndView findAll() {
+        List<Record> records = noteBook.getRecords();
+        if(records.size() == 0) {
             logger.warn("FindAll: не создано ни одной записи");
-            return new CommandResult("Не создано ни одной записи", CommandResult.WARNING);
+            MessageListModel resultModel = new MessageListModel();
+            resultModel.addMessage(new Message("Не создано ни одной записи", Message.WARNING));
+            return new ModelAndView("MessagesView", resultModel);
         }
-        return new CommandResult(noteBook.getRecords(), CommandResult.SUCCESS);
+        RecordListModel resultModel = new RecordListModel();
+        resultModel.setRecords(records);
+        return new ModelAndView("RecordsView", resultModel);
     }
 
-    public CommandResult findByID(int recordID) {
+    public ModelAndView findByID(int recordID) {
         for(Record record: noteBook.getRecords()) {
             if(record.getRecordID() == recordID) {
-                return new CommandResult(record, CommandResult.SUCCESS);
+                RecordModel resultModel = new RecordModel();
+                resultModel.setRecord(record);
+                return new ModelAndView("RecordView", resultModel);
             }
         }
         logger.warn("FindByID: запись c ID: " + recordID + " не найдена");
-        return new CommandResult("Запись c ID: " + recordID + " не найдена", CommandResult.WARNING);
+        MessageListModel resultModel = new MessageListModel();
+        resultModel.addMessage(new Message("Запись c ID: " + recordID + " не найдена", Message.WARNING));
+        return new ModelAndView("RecordView", resultModel);
     }
 
     public void init() throws NoteBookLoadException {
@@ -90,5 +106,9 @@ public class NoteBookService {
 
     public void setLogger(Logger logger) {
         this.logger = logger;
+    }
+
+    public void setIdGen(IDGen idGen) {
+        this.idGen = idGen;
     }
 }

@@ -14,10 +14,9 @@ public class AboutCommandFactory implements CommandFactory {
     private static Class commandClass = AboutCommand.class;
 
     @Override
-    public Command createCommand(NoteBookService noteBookService, Map<String, Object> commandParams) {
-        AboutCommand command = new AboutCommand();
-        command.setNoteBookService(noteBookService);
-
+    public Command createCommand(NoteBookService noteBookService, Map<String, Object> commandParams, Map<String, String> globalParams) {
+        Command command = new AboutCommand();
+        command.setGlobalParams(globalParams);
         return command;
     }
 

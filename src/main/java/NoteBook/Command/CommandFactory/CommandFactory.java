@@ -2,7 +2,6 @@ package NoteBook.Command.CommandFactory;
 
 import NoteBook.Command.Command.Command;
 import NoteBook.Services.NoteBookService;
-import NoteBook.View.View;
 
 import java.util.Map;
 
@@ -11,5 +10,5 @@ import java.util.Map;
  */
 public interface CommandFactory {
 
-    Command createCommand(NoteBookService noteBookService, Map<String, Object> commandParams);
+    Command createCommand(NoteBookService noteBookService, Map<String, Object> commandParams, Map<String, String> globalParams);
 }

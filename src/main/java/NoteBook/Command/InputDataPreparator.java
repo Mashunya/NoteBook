@@ -5,6 +5,8 @@ import NoteBook.Exception.ParseException;
 import NoteBook.Exception.RequiredParamValidateException;
 import NoteBook.Exception.ValidateException;
 import NoteBook.Parsers.IntParser;
+import NoteBook.Parsers.Parser;
+import NoteBook.Parsers.ParserRegistry;
 import NoteBook.Validators.Validator;
 
 import java.util.Collection;
@@ -15,51 +17,50 @@ import java.util.Map;
  */
 public class InputDataPreparator {
 
-    private Map<String, Object> params;
-    private Collection<ParamDescription> paramsDescription;
+    private Map<String, Object> parseParams(Map<String, Object> inputParams, Collection<ParamDescription> paramsDescription) throws ParseException {
 
-    private void parseParams() throws ParseException {
+        Parser parser;
         for(ParamDescription paramDescription: paramsDescription) {
             String paramName = paramDescription.getParamName();
-            Object paramValue = params.get(paramName);
+            Object paramValue = inputParams.get(paramName);
             //TODO registry?
-            if(paramDescription.getParamClass().equals(Integer.class)) {
-                params.put(paramName, new IntParser().parse(paramValue));
+            parser = ParserRegistry.getInstance().getParser(paramDescription.getParamClass());
+            if(parser != null) {
+                inputParams.put(paramName, parser.parse(paramValue));
             }
         }
+        return inputParams;
     }
 
-    private void validateParams() throws ValidateException {
+    private void validateParams(Map<String, Object> inputParams, Collection<ParamDescription> paramsDescription) throws ValidateException {
 
         for(ParamDescription paramDescription: paramsDescription) {
             String paramName = paramDescription.getParamName();
-            Object paramValue = params.get(paramName);
+            Object paramValue = inputParams.get(paramName);
             for(Validator validator: paramDescription.getValidators()) {
                 validator.validate(paramValue, paramDescription);
             }
         }
     }
-// TODO: name should mention default value processign
-    private void initParams() {
+
+    private Map<String, Object> setDefaultValues(Map<String, Object> inputParams, Collection<ParamDescription> paramsDescription) {
         for(ParamDescription paramDescription: paramsDescription) {
             String paramName = paramDescription.getParamName();
-            Object paramValue = params.get(paramName);
+            Object paramValue = inputParams.get(paramName);
             if(paramValue == null) {
-                params.put(paramName, paramDescription.getDefaultValue());
+                inputParams.put(paramName, paramDescription.getDefaultValue());
             }
         }
+        return inputParams;
     }
 
     public Map<String, Object> prepareData(Map<String, Object> inputParams,
                                            Collection<ParamDescription> paramsDescription) throws ValidateException, ParseException {
         // TODO: pass as params to functions
-        this.paramsDescription = paramsDescription;
-        this.params = inputParams;
+        inputParams = parseParams(inputParams, paramsDescription);
+        validateParams(inputParams, paramsDescription);
+        inputParams = setDefaultValues(inputParams, paramsDescription);
 
-        parseParams();
-        validateParams();
-        initParams();
-
-        return params;
+        return inputParams;
     }
 }

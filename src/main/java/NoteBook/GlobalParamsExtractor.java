@@ -7,18 +7,18 @@ import java.util.Map;
 /**
  * Created by Маша on 16.06.2017.
  */
-public class GlobalProps {
-    private static Map<String, String> globalProps;
+public class GlobalParamsExtractor {
+    private static Map<String, String> globalParams;
 
     public static Map<String, String> getProps() throws PropFileLoadException {
-        if(globalProps == null) {
+        if(globalParams == null) {
             extractProps();
         }
-        return globalProps;
+        return globalParams;
     }
 
     private static void extractProps() throws PropFileLoadException {
         PropsLoader propsLoader = new PropsLoader("global.properties");
-        globalProps = propsLoader.loadAllProps();
+        globalParams = propsLoader.loadAllProps();
     }
 }

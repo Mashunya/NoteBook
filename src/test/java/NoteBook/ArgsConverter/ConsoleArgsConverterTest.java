@@ -17,7 +17,8 @@ import static org.junit.Assert.*;
 public class ConsoleArgsConverterTest {
 
     @Test
-    public void convert_allParamsRight() throws IllegalCommandParamException {
+    public void convertAllowableParams() throws IllegalCommandParamException {
+        //given
         String[] args = {"commandName", "rec_text=some text", "rec_title=some title", "rec_author=some author", "rec_type=some type"};
 
         Map<String, Object> expectedResultMap = new HashMap<>();
@@ -28,26 +29,36 @@ public class ConsoleArgsConverterTest {
 
         ConsoleArgsConverter converter = new ConsoleArgsConverter();
 
+        //when
         Map<String, Object> resultMap = converter.convert(args);
 
+        //then
         assertEquals(expectedResultMap, resultMap);
     }
 
     @Test(expected = IllegalCommandParamException.class)
     public void convert_illegalParamName() throws IllegalCommandParamException {
+        //given
         String[] args = {"commandName", "illegalParam=something"};
-
         ConsoleArgsConverter converter = new ConsoleArgsConverter();
 
+        //when
         converter.convert(args);
+
+        //then
+        //expected exception
     }
 
     @Test(expected = IllegalCommandParamException.class)
     public void convert_paramWithoutValue() throws IllegalCommandParamException {
+        //given
         String[] args = {"commandName", "rec_ID"};
-
         ConsoleArgsConverter converter = new ConsoleArgsConverter();
 
+        //when
         converter.convert(args);
+
+        //then
+        //expected exception
     }
 }

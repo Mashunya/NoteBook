@@ -1,7 +1,5 @@
 package NoteBook.Command.CommandFactory;
 
-import NoteBook.Command.Command.AddCommand;
-import NoteBook.Command.Command.Command;
 import NoteBook.Exception.CommandFactoryException;
 import NoteBook.Exception.CommandFactoryLoadException;
 import NoteBook.Exception.CommandFactoryNotFoundException;
@@ -15,7 +13,7 @@ import java.util.Set;
  * Created by Маша on 15.06.2017.
  */
 public class CommandFactoryRegistry {
-    private static final String factoryPackage = "NoteBook.Command.CommandFactory";
+    private static final String factoryPackage = "NoteBook.CommandWorkedWithNoteBook.CommandFactory";
 
     public CommandFactory getCommandFactory(Class commandClass) throws CommandFactoryException {
         Set<Class<? extends CommandFactory>> factories

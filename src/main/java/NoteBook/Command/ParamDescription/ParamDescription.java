@@ -1,8 +1,7 @@
 package NoteBook.Command.ParamDescription;
 
-import NoteBook.Parsers.Parser;
-import NoteBook.Validators.RequiredValidator;
 import NoteBook.Validators.Validator;
+import NoteBook.Validators.ValidatorNames;
 import NoteBook.Validators.ValidatorRegistry;
 
 import java.util.ArrayList;
@@ -17,14 +16,13 @@ public class ParamDescription {
     private boolean required;
     private List<Validator> validators;
     private Object defaultValue;
-    // TODO: max? min?
-    private int stringLength;
+    private int maxStringLength;
 
     private ParamDescription() {
         validators = new ArrayList<>();
-        //TODO: COnstanst or enum?
-        validators.add(ValidatorRegistry.getInstance().getValidator("Required"));
-        validators.add(ValidatorRegistry.getInstance().getValidator("StringLength"));
+        //TODO: Constants or enum?
+        validators.add(ValidatorRegistry.getInstance().getValidator(ValidatorNames.Required));
+        validators.add(ValidatorRegistry.getInstance().getValidator(ValidatorNames.StringLength));
     }
 
     public boolean isRequired() {
@@ -43,8 +41,8 @@ public class ParamDescription {
         return paramClass;
     }
 
-    public int getStringLength() {
-        return stringLength;
+    public int getMaxStringLength() {
+        return maxStringLength;
     }
 
     public String getParamName() {
@@ -87,7 +85,7 @@ public class ParamDescription {
         }
 
         public Builder length(int stringLength) {
-            ParamDescription.this.stringLength = stringLength;
+            ParamDescription.this.maxStringLength = stringLength;
             return this;
         }
 

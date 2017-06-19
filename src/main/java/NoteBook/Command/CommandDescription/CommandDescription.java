@@ -19,6 +19,12 @@ public class CommandDescription {
         this.paramsDescription = new ArrayList<>();
     }
 
+    public CommandDescription(String commandName, Class commandClass, Collection<ParamDescription> paramsDescription) {
+        this.commandName = commandName;
+        this.commandClass = commandClass;
+        this.paramsDescription = paramsDescription;
+    }
+
     public Class getCommandClass() {
         return commandClass;
     }

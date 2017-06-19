@@ -1,6 +1,5 @@
 package NoteBook.Services;
 
-import NoteBook.Command.CommandResult.CommandResult;
 import NoteBook.Entity.NoteBook;
 import NoteBook.Entity.Record;
 import NoteBook.Exception.SaveRecordsException;
@@ -8,8 +7,8 @@ import NoteBook.IDGen.IDGen;
 import NoteBook.IDGen.SimpleIDGen;
 import NoteBook.RecordStore.FileStore;
 import NoteBook.RecordStore.RecordStore;
-import NoteBook.View.ConsoleView;
-import NoteBook.View.View;
+import NoteBook.ModelAndView.View.ConsoleView;
+import NoteBook.ModelAndView.View.View;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +39,7 @@ public class NoteBookServiceTest {
         logger = mock(Logger.class);
         idGen = mock(SimpleIDGen.class);
         recordStore = mock(FileStore.class);
-        view = mock(ConsoleView.class);
+        //view = mock(ConsoleView.class);
     }
 
     @Test
@@ -53,7 +52,7 @@ public class NoteBookServiceTest {
 
         noteBookService.addRecord(record);
 
-        verify(view).show("Запись успешно добавлена", CommandResult.SUCCESS);
+        //verify(view).show("Запись успешно добавлена", CommandResult.SUCCESS);
         verify(logger).info("Запись успешно добавлена");
     }
 
@@ -69,7 +68,7 @@ public class NoteBookServiceTest {
 
         noteBookService.addRecord(record);
 
-        verify(view).show(anyString(), CommandResult.SUCCESS);
+        //verify(view).show(anyString(), CommandResult.SUCCESS);
         verify(logger).error(anyString(), any(Exception.class));
     }
 
@@ -86,7 +85,7 @@ public class NoteBookServiceTest {
 
         noteBookService.deleteRecord(0);
 
-        verify(view).show("Запись c ID: 0 успешно удалена", CommandResult.SUCCESS);
+        //verify(view).show("Запись c ID: 0 успешно удалена", CommandResult.SUCCESS);
         verify(logger).info("Запись c ID: 0 успешно удалена");
     }
 
@@ -103,7 +102,7 @@ public class NoteBookServiceTest {
 
         noteBookService.deleteRecord(0);
 
-        verify(view).show("Запись c ID: 0 не найдена", CommandResult.WARNING);
+        //verify(view).show("Запись c ID: 0 не найдена", CommandResult.WARNING);
         verify(logger).warn("DeleteRecord: запись c ID: 0 не найдена");
     }
 
@@ -123,7 +122,7 @@ public class NoteBookServiceTest {
 
         noteBookService.deleteRecord(0);
 
-        verify(view).show(anyString(), CommandResult.ERROR);
+        //verify(view).show(anyString(), CommandResult.ERROR);
         verify(logger).error(anyString(), any(Exception.class));
     }
 }

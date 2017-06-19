@@ -1,34 +1,32 @@
 package NoteBook.Command.Command;
 
-import NoteBook.Command.CommandResult.CommandResult;
 import NoteBook.Entity.Record;
+import NoteBook.ModelAndView.ModelAndView;
 
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Маша on 08.06.2017.
  */
 //TODO: try in branch to use command with execute(Map<String, String>) instead of fields
-public class AddCommand extends Command {
+public class AddCommand extends CommandWorkedWithNoteBook {
 
     private String text;
     private String author;
     private String type;
     private String title;
-    private String OSName;
+
+    private Map<String, String> globalParams;
 
     @Override
-    public List<CommandResult> execute(Map<String, String>) {
-        results
-
-        addProgramNameToResult();
-
+    public ModelAndView execute() {
         Record record = new Record(text, author, title, type);
-        results.add(noteBookService.addRecord(record));
+        return noteBookService.addRecord(record);
+    }
 
-        addCheckOSToResult();
-        return results;
+    @Override
+    public Map<String, String> getGlobalParams() {
+        return globalParams;
     }
 
     public void setText(String text) {
@@ -45,5 +43,9 @@ public class AddCommand extends Command {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setGlobalParams(Map<String, String> globalParams) {
+        this.globalParams = globalParams;
     }
 }
