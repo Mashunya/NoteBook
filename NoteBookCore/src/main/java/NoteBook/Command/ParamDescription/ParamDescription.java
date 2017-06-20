@@ -95,6 +95,7 @@ public class ParamDescription {
         }
 
         public ParamDescription build() {
+            //TODO: validate that optional fields have default values defined
             return ParamDescription.this;
         }
 

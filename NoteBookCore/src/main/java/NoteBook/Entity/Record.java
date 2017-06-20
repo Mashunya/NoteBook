@@ -20,6 +20,8 @@ public class Record implements Serializable {
         this.author = author;
         this.title = title;
         this.type = type;
+
+        //TODO: add new param, e.g. deadlineDate that is provided by user
         this.updatedDate = this.createdDate = new Date();
     }
 
