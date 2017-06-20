@@ -6,6 +6,7 @@ import NoteBook.ModelAndView.Model.MessageStatus;
 import NoteBook.ModelAndView.Model.Model;
 import NoteBook.ModelAndView.ModelAndView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,32 +14,17 @@ import java.util.Map;
  */
 public class AboutCommand implements Command {
 
-    private Map<String, String> globalParams;
-
     @Override
-    public ModelAndView execute() {
+    public ModelAndView execute(Map<String, Object> params) {
         Model resultModel = new MessageListModel();
 
-        if(globalParams == null) {
-            resultModel.addMessage(new Message("Глобальные параметры не установлены", MessageStatus.WARNING));
-        } else {
-            String aboutProgram = "Информация о программе:\n";
-            aboutProgram += ("Название программы: " + globalParams.get("Program_Name") + "\n");
-            aboutProgram += ("Версия: " + globalParams.get("Version") + "\n");
-            aboutProgram += ("Краткое описание: " + globalParams.get("About_Program") + "\n");
-            aboutProgram += ("Автор: " + globalParams.get("Author") + "\n");
-            resultModel.addMessage(new Message(aboutProgram, MessageStatus.INFO));
-        }
+        String aboutProgram = "Информация о программе:\n";
+        aboutProgram += ("Название программы: " + params.get("Program_Name") + "\n");
+        aboutProgram += ("Версия: " + params.get("Version") + "\n");
+        aboutProgram += ("Краткое описание: " + params.get("About_Program") + "\n");
+        aboutProgram += ("Автор: " + params.get("Author") + "\n");
+        resultModel.addMessage(new Message(aboutProgram, MessageStatus.INFO));
 
         return new ModelAndView("MessagesView", resultModel);
-    }
-
-    @Override
-    public Map<String, String> getGlobalParams() {
-        return globalParams;
-    }
-
-    public void setGlobalParams(Map<String, String> globalParams) {
-        this.globalParams = globalParams;
     }
 }

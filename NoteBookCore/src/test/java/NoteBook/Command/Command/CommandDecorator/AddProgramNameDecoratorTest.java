@@ -38,59 +38,43 @@ public class AddProgramNameDecoratorTest {
         command = mock(Command.class);
         decorator = new AddProgramNameDecorator(command);
 
-        when(command.execute()).thenReturn(modelAndView);
         when(modelAndView.getModel()).thenReturn(model);
     }
 
     @Test
     public void executeAddProgramNameAndVersionInfo() {
         //given
-        Map<String, String> testGlobalParams = new HashMap<>();
+        Map<String, Object> testGlobalParams = new HashMap<>();
         testGlobalParams.put("Program_Name", "Test Program Name");
         testGlobalParams.put("Version", "1.0");
 
-        when(command.getGlobalParams()).thenReturn(testGlobalParams);
+        when(command.execute(testGlobalParams)).thenReturn(modelAndView);
 
         Message expectedMessage = new Message("Программа Test Program Name, версия 1.0", MessageStatus.INFO);
 
         //when
-        decorator.execute();
+        decorator.execute(testGlobalParams);
 
         //then
         verify(model).addMessage(expectedMessage);
-        verify(command).execute();
-    }
-
-    @Test
-    public void executeAllGlobalParamsNotSpecified() {
-        //given
-        when(command.getGlobalParams()).thenReturn(null);
-
-        Message expectedMessage = new Message("Глобальные параметры не установлены", MessageStatus.WARNING);
-
-        //when
-        decorator.execute();
-
-        //then
-        verify(model).addMessage(expectedMessage);
-        verify(command).execute();
+        verify(command).execute(testGlobalParams);
     }
 
     @Test
     public void executeSomeGlobalParamsNotSpecified() {
         //given
-        Map<String, String> testGlobalParams = new HashMap<>();
+        Map<String, Object> testGlobalParams = new HashMap<>();
         testGlobalParams.put("Program_Name", "Test Program Name");
 
-        when(command.getGlobalParams()).thenReturn(testGlobalParams);
+        when(command.execute(testGlobalParams)).thenReturn(modelAndView);
 
         Message expectedMessage = new Message("Глобальные параметры Program_Name и (или) Version не заданы", MessageStatus.WARNING);
 
         //when
-        decorator.execute();
+        decorator.execute(testGlobalParams);
 
         //then
         verify(model).addMessage(expectedMessage);
-        verify(command).execute();
+        verify(command).execute(testGlobalParams);
     }
 }

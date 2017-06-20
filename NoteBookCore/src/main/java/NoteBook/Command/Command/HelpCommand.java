@@ -6,6 +6,7 @@ import NoteBook.ModelAndView.Model.MessageStatus;
 import NoteBook.ModelAndView.Model.Model;
 import NoteBook.ModelAndView.ModelAndView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,10 +14,8 @@ import java.util.Map;
  */
 public class HelpCommand extends CommandWorkedWithNoteBook {
 
-    private Map<String, String> globalParams;
-
     @Override
-    public ModelAndView execute() {
+    public ModelAndView execute(Map<String, Object> params) {
         Model resultModel = new MessageListModel();
         resultModel.addMessage(new Message("Возможные команды:\n" +
                 "1. add (rec_text (required), rec_title, rec_author, rec_type) - добавить запись\n" +
@@ -26,14 +25,5 @@ public class HelpCommand extends CommandWorkedWithNoteBook {
                 "5. help - справка\n" +
                 "6. about - о программе", MessageStatus.INFO));
         return new ModelAndView("MessagesView", resultModel);
-    }
-
-    @Override
-    public Map<String, String> getGlobalParams() {
-        return globalParams;
-    }
-
-    public void setGlobalParams(Map<String, String> globalParams) {
-        this.globalParams = globalParams;
     }
 }

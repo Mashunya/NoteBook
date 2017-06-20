@@ -14,7 +14,7 @@ public class CommandDescriptionRegistry {
 
     private Map<String, CommandDescription> commandDescriptionMap;
     private static CommandDescriptionRegistry factory;
-//TODO use single class for command descriptionc
+//TODO use single class for command descriptions
     private CommandDescriptionRegistry() {
         commandDescriptionMap = new HashMap<>();
 

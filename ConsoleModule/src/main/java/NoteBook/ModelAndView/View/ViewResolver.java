@@ -14,7 +14,7 @@ public class ViewResolver {
         viewMap = new HashMap<>();
         viewMap.put("MessagesView", new MessagesView());
         viewMap.put("RecordView", new RecordView());
-        viewMap.put("RecordListView", new RecordListView());
+        viewMap.put("RecordsView", new RecordListView());
     };
 
     public static View getView(String viewName) {

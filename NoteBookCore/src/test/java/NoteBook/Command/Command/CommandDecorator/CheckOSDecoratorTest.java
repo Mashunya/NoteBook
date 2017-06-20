@@ -33,76 +33,61 @@ public class CheckOSDecoratorTest {
         command = mock(Command.class);
         decorator = spy(new CheckOSDecorator(command));
 
-        when(command.execute()).thenReturn(modelAndView);
         when(modelAndView.getModel()).thenReturn(model);
     }
 
     @Test
     public void executeOSIsSameWithRecommended() {
         //given
-        Map<String, String> testGlobalParams = new HashMap<>();
+        Map<String, Object> testGlobalParams = new HashMap<>();
         testGlobalParams.put("Recommended_OS", "Windows_NT");
 
-        when(command.getGlobalParams()).thenReturn(testGlobalParams);
+        when(command.execute(testGlobalParams)).thenReturn(modelAndView);
         when(decorator.getCurrentOS()).thenReturn("Windows_NT");
 
         Message expectedMessage = new Message("Ваша ОС совпадает с рекомендованной", MessageStatus.INFO);
 
         //when
-        decorator.execute();
+        decorator.execute(testGlobalParams);
 
         //then
         verify(model).addMessage(expectedMessage);
-        verify(command).execute();
+        verify(command).execute(testGlobalParams);
     }
 
     @Test
     public void executeOSIsNotSameWithRecommended() {
         //given
-        Map<String, String> testGlobalParams = new HashMap<>();
+        Map<String, Object> testGlobalParams = new HashMap<>();
         testGlobalParams.put("Recommended_OS", "Windows_NT");
 
-        when(command.getGlobalParams()).thenReturn(testGlobalParams);
+        when(command.execute(testGlobalParams)).thenReturn(modelAndView);
         when(decorator.getCurrentOS()).thenReturn("Linux");
 
         Message expectedMessage = new Message("Рекомендованная версия ОС: Windows_NT", MessageStatus.WARNING);
 
         //when
-        decorator.execute();
+        decorator.execute(testGlobalParams);
 
         //then
         verify(model).addMessage(expectedMessage);
-        verify(command).execute();
+        verify(command).execute(testGlobalParams);
     }
 
     @Test
     public void executeSomeGlobalParamsNotSpecified() {
         //given
-        Map<String, String> testGlobalParams = new HashMap<>();
-        when(command.getGlobalParams()).thenReturn(testGlobalParams);
+        Map<String, Object> testGlobalParams = new HashMap<>();
+
+        when(command.execute(testGlobalParams)).thenReturn(modelAndView);
 
         Message expectedMessage = new Message("Глобальный параметр Recommended_OS не задан", MessageStatus.WARNING);
 
         //when
-        decorator.execute();
+        decorator.execute(testGlobalParams);
 
         //then
         verify(model).addMessage(expectedMessage);
-        verify(command).execute();
-    }
-
-    @Test
-    public void executeAllGlobalParamsNotSpecified() {
-        //given
-        when(command.getGlobalParams()).thenReturn(null);
-
-        Message expectedMessage = new Message("Глобальные параметры не установлены", MessageStatus.WARNING);
-
-        //when
-        decorator.execute();
-
-        //then
-        verify(model).addMessage(expectedMessage);
-        verify(command).execute();
+        verify(command).execute(testGlobalParams);
     }
 }
