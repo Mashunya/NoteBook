@@ -80,10 +80,13 @@ public class NoteBookProj {
             }
             Command command = commandFactory.createCommand(noteBookService, preparedParams, globalParams);
             ModelAndView resultModelAndView = command.execute();
+
+            //TODO: not static, also for other registries
             View view = ViewResolver.getView(resultModelAndView.getViewName());
             if(view == null) {
                 consoleView.show(new Message("Представление не найдено", MessageStatus.ERROR));
             } else {
+                // TODO try to generify
                 view.show(resultModelAndView.getModel());
             }
 

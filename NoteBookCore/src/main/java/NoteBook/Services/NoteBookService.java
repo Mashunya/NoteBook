@@ -79,6 +79,7 @@ public class NoteBookService {
         }
         RecordListModel resultModel = new RecordListModel();
         resultModel.setRecords(records);
+        //TODO: service should return data, command should prepare model and view
         return new ModelAndView("RecordsView", resultModel);
     }
 

@@ -9,6 +9,8 @@ import java.util.Collection;
  * Created by Маша on 15.06.2017.
  */
 public class CommandDescription {
+
+    //todo: get rid of command
     protected String commandName;
     protected Class commandClass;
     protected Collection<ParamDescription> paramsDescription;

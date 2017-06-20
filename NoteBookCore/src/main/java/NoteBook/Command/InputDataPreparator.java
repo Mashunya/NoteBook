@@ -15,6 +15,9 @@ import java.util.Map;
 /**
  * Created by Маша on 15.06.2017.
  */
+
+//TODO: lower case package names
+    // TODO: refactor package structure
 public class InputDataPreparator {
 
     private Map<String, Object> parseParams(Map<String, Object> inputParams, Collection<ParamDescription> paramsDescription) throws ParseException {
