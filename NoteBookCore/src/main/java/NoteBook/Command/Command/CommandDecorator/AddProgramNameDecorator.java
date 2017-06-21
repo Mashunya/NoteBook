@@ -19,17 +19,11 @@ public class AddProgramNameDecorator implements Command {
     }
 
     @Override
-    public ModelAndView execute() {
-        ModelAndView resultModelAndView = command.execute();
+    public ModelAndView execute(Map<String, Object> params) {
+        ModelAndView resultModelAndView = command.execute(params);
 
-        Map<String, String> globalParams = getGlobalParams();
-        if(globalParams == null) {
-            resultModelAndView.getModel().addMessage(new Message("Глобальные параметры не установлены", MessageStatus.WARNING));
-            return resultModelAndView;
-        }
-
-        String programName = globalParams.get("Program_Name");
-        String version = globalParams.get("Version");
+        String programName = (String)params.get("Program_Name");
+        String version = (String)params.get("Version");
 
         if(programName != null && version != null) {
             String aboutProgram = "Программа " + programName + ", версия " + version;
@@ -40,15 +34,5 @@ public class AddProgramNameDecorator implements Command {
         }
 
         return resultModelAndView;
-    }
-
-    @Override
-    public void setGlobalParams(Map<String, String> globalParams) {
-        command.setGlobalParams(globalParams);
-    }
-
-    @Override
-    public Map<String, String> getGlobalParams() {
-        return command.getGlobalParams();
     }
 }

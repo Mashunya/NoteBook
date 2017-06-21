@@ -20,17 +20,11 @@ public class CheckOSDecorator implements Command {
     }
 
     @Override
-    public ModelAndView execute() {
-        ModelAndView resultModelAndView = command.execute();
+    public ModelAndView execute(Map<String, Object> params) {
+        ModelAndView resultModelAndView = command.execute(params);
         Model resultModel = resultModelAndView.getModel();
 
-        Map<String, String> globalParams = getGlobalParams();
-        if(globalParams == null) {
-            resultModel.addMessage(new Message("Глобальные параметры не установлены", MessageStatus.WARNING));
-            return resultModelAndView;
-        }
-
-        String recommendedOS = globalParams.get("Recommended_OS");
+        String recommendedOS = (String)params.get("Recommended_OS");
 
         if(recommendedOS != null) {
             if (recommendedOS.equals(getCurrentOS())) {
@@ -47,15 +41,5 @@ public class CheckOSDecorator implements Command {
 
     String getCurrentOS() {
         return System.getenv().get("OS");
-    }
-
-    @Override
-    public void setGlobalParams(Map<String, String> globalParams) {
-        command.setGlobalParams(globalParams);
-    }
-
-    @Override
-    public Map<String, String> getGlobalParams() {
-        return command.getGlobalParams();
     }
 }

@@ -22,14 +22,13 @@ public class AboutCommandTest {
     @Test
     public void executeShowGlobalParams() {
         //given
-        Map<String, String> testGlobalParams = new HashMap<>();
+        Map<String, Object> testGlobalParams = new HashMap<>();
         testGlobalParams.put("Program_Name", "Test Program Name");
         testGlobalParams.put("Version", "1.0");
         testGlobalParams.put("About_Program", "Test program description");
         testGlobalParams.put("Author", "Maltseva Masha");
 
         AboutCommand command = new AboutCommand();
-        command.setGlobalParams(testGlobalParams);
 
         String expectedMessageText = "Информация о программе:\n" +
                 "Название программы: Test Program Name\n" +
@@ -43,24 +42,7 @@ public class AboutCommandTest {
         ModelAndView expectedModelAndView = new ModelAndView("MessagesView", resultModel);
 
         //when
-        ModelAndView resultModelAndView = command.execute();
-
-        //then
-        assertEquals(expectedModelAndView, resultModelAndView);
-    }
-
-    @Test
-    public void executeGlobalParamsNotSpecified() {
-        //given
-        AboutCommand command = new AboutCommand();
-
-        Model resultModel = new MessageListModel();
-        resultModel.addMessage(new Message("Глобальные параметры не установлены", MessageStatus.WARNING));
-
-        ModelAndView expectedModelAndView = new ModelAndView("MessagesView", resultModel);
-
-        //when
-        ModelAndView resultModelAndView = command.execute();
+        ModelAndView resultModelAndView = command.execute(testGlobalParams);
 
         //then
         assertEquals(expectedModelAndView, resultModelAndView);

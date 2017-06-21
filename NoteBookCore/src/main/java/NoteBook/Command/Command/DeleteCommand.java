@@ -2,6 +2,7 @@ package NoteBook.Command.Command;
 
 import NoteBook.ModelAndView.ModelAndView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,25 +10,8 @@ import java.util.Map;
  */
 public class DeleteCommand extends CommandWorkedWithNoteBook {
 
-    private Integer recordID;
-
-    private Map<String, String> globalParams;
-
     @Override
-    public ModelAndView execute() {
-        return noteBookService.deleteRecord(recordID);
-    }
-
-    @Override
-    public Map<String, String> getGlobalParams() {
-        return globalParams;
-    }
-
-    public void setRecordID(Integer recordID) {
-        this.recordID = recordID;
-    }
-
-    public void setGlobalParams(Map<String, String> globalParams) {
-        this.globalParams = globalParams;
+    public ModelAndView execute(Map<String, Object> params) {
+        return noteBookService.deleteRecord((Integer)params.get("recordID"));
     }
 }

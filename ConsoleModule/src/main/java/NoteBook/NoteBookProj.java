@@ -51,7 +51,6 @@ public class NoteBookProj {
 
         ConsoleView consoleView = new ConsoleView();
         ConsoleArgsConverter argsConverter = new ConsoleArgsConverter();
-        CommandFactoryRegistry commandFactoryRegistry = new CommandFactoryRegistry();
 
         try {
             Map<String, Object> params = argsConverter.convert(args);
@@ -69,7 +68,7 @@ public class NoteBookProj {
             InputDataPreparator inputDataPreparator = new InputDataPreparator();
             Map<String, Object> preparedParams = inputDataPreparator.prepareData(params, commandDescription.getParamsDescription());
 
-            CommandFactory commandFactory = commandFactoryRegistry.getCommandFactory(commandDescription.getCommandClass());
+            CommandFactory commandFactory = new CommandFactory();
 
             Map<String, String> globalParams = null;
             try {
@@ -78,8 +77,9 @@ public class NoteBookProj {
                 consoleView.show(new Message(ex.getMessage(), MessageStatus.ERROR));
                 logger.error(ex.getMessage(), ex);
             }
-            Command command = commandFactory.createCommand(noteBookService, preparedParams, globalParams);
-            ModelAndView resultModelAndView = command.execute();
+            Command command = commandFactory.createCommand(commandDescription.getCommandClass(), noteBookService);
+            preparedParams.putAll(globalParams);
+            ModelAndView resultModelAndView = command.execute(preparedParams);
 
             //TODO: not static, also for other registries
             View view = ViewResolver.getView(resultModelAndView.getViewName());
@@ -90,7 +90,7 @@ public class NoteBookProj {
                 view.show(resultModelAndView.getModel());
             }
 
-        } catch(IllegalCommandParamException | CommandFactoryException | ValidateException | ParseException ex) {
+        } catch(IllegalCommandParamException | ValidateException | ParseException ex) {
             consoleView.show(new Message(ex.getMessage(), MessageStatus.ERROR));
             logger.error(ex.getMessage(), ex);
         }
