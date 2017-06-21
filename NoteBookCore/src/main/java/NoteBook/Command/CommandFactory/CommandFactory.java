@@ -19,7 +19,10 @@ public class CommandFactory {
             command = (Command)commandClass.newInstance();
             Method method = commandClass.getMethod("setNoteBookService", NoteBookService.class);
             method.invoke(command, noteBookService);
-        } catch (InstantiationException | IllegalAccessException |InvocationTargetException | NoSuchMethodException ex) {}
+        } catch (InstantiationException | IllegalAccessException |InvocationTargetException | NoSuchMethodException ex) {
+
+            //TODO: bad practice
+        }
 
         return command;
     }

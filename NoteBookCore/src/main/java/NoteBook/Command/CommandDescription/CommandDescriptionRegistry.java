@@ -21,6 +21,8 @@ public class CommandDescriptionRegistry {
         List<ParamDescription> recordFieldsParamsDescription = generateRecordFieldsParamsDescription();
         List<ParamDescription> onlyRecordIDParamsDescription = generateOnlyRecordIDParamsDescription();
 
+
+        // TODO: use command instance instead of class, as it is stateless already
         registerCommand("add", AddCommand.class, recordFieldsParamsDescription);
         registerCommand("delete", DeleteCommand.class, onlyRecordIDParamsDescription);
         registerCommand("findAll", FindAllCommand.class);
