@@ -27,7 +27,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>NoteBook.NoteBookProj</mainClass>
+                            <mainClass>notebook.NoteBookProj</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -51,7 +51,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>NoteBook.NoteBookProj</mainClass>
+                            <mainClass>notebook.NoteBookProj</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

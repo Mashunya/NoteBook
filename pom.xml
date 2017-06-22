@@ -13,6 +13,7 @@
     <modules>
         <module>NoteBookCore</module>
         <module>ConsoleModule</module>
+        <module>ServletModule</module>
     </modules>
 
     <build>
