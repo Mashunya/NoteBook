@@ -13,7 +13,7 @@
 <body>
     <form action="/command" method="post">
         <label>RecordID: <input type="number" name="serv_ID" /></label><br/>
-        <button name="serv_command" value="delete">Send</button>
+        <button name="command" value="delete">Send</button>
     </form>
 </body>
 </html>

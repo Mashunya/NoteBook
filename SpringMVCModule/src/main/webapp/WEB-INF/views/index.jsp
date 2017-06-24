@@ -11,8 +11,8 @@
     <title>NoteBook</title>
 </head>
 <body>
-<form action="/command" method="post">
-    <a href="addCommandInit.jsp">Add</a>
+<form action="/notebook/command" method="post">
+    <a href="/notebook/add">Add</a>
     <a href="deleteCommandInit.jsp">Delete</a>
     <a href="findByIDCommandInit.jsp">FindByID</a>
     <button name="command" value="findAll">Find All</button>

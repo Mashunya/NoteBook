@@ -17,7 +17,7 @@
         <label>Author: <input type="text" name="serv_author" /></label><br/>
         <label>Type: <input type="text" name="serv_type" /></label><br/>
         <label>Deadline: <input type="date" name="serv_deadline" data-date-format="DD.MM.YYYY" /></label><br/>
-        <button name="serv_command" value="add">Send</button>
+        <button name="command" value="add">Send</button>
     </form>
 </body>
 </html>

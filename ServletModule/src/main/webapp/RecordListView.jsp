@@ -19,12 +19,13 @@
         <p>${record.recordText}</p>
         <p>${record.author}</p>
         <p>${record.title}</p>
-        <fmt:formatDate value="${record.deadlineDate}" pattern="dd.MM.yyyy" />
-        <fmt:formatDate value="${record.createdDate}" pattern="dd.MM.yyyy" />
-        <fmt:formatDate value="${record.updatedDate}" pattern="dd.MM.yyyy" />
+        <fmt:formatDate value="${record.deadlineDate}" pattern="${dateFormat}" />
+        <fmt:formatDate value="${record.createdDate}" pattern="${dateFormat}" />
+        <fmt:formatDate value="${record.updatedDate}" pattern="${dateFormat}" />
     </c:forEach>
     <c:forEach items="${result.messages}" var="message" varStatus="varStatus">
         <pre>${varStatus.index}: ${message.message}, ${message.status}</pre>
     </c:forEach>
+    <a href="index.jsp">На главную</a>
 </body>
 </html>

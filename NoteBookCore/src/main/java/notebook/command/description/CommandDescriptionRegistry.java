@@ -1,6 +1,8 @@
 package notebook.command.description;
 
 import notebook.command.*;
+import notebook.command.decorator.AddProgramNameDecorator;
+import notebook.command.decorator.CheckOSDecorator;
 import notebook.command.params.ParamDescription;
 import notebook.exception.ExpectedDefaultValueException;
 import notebook.validators.ValidatorNames;
@@ -20,12 +22,21 @@ public class CommandDescriptionRegistry {
         Collection<ParamDescription> recordFieldsParamsDescription = generateRecordFieldsParamsDescription();
         Collection<ParamDescription> onlyRecordIDParamsDescription = generateOnlyRecordIDParamsDescription();
 
-        commandDescriptionMap.put("add", new CommandDescription(AddCommand.class, recordFieldsParamsDescription));
-        commandDescriptionMap.put("delete", new CommandDescription(DeleteCommand.class, onlyRecordIDParamsDescription));
-        commandDescriptionMap.put("findAll", new CommandDescription(FindAllCommand.class));
-        commandDescriptionMap.put("findByID", new CommandDescription(FindByIDCommand.class, onlyRecordIDParamsDescription));
-        commandDescriptionMap.put("help", new CommandDescription(HelpCommand.class));
-        commandDescriptionMap.put("about", new CommandDescription(AboutCommand.class));
+        List<Class> decorators = new ArrayList<>();
+        decorators.add(AddProgramNameDecorator.class);
+        decorators.add(CheckOSDecorator.class);
+        decorators = Collections.unmodifiableList(decorators);
+
+        commandDescriptionMap.put("add", CommandDescription.newBuilder(AddCommand.class)
+                .paramDescription(recordFieldsParamsDescription).decorators(decorators).build());
+        commandDescriptionMap.put("delete", CommandDescription.newBuilder(DeleteCommand.class)
+                .paramDescription(onlyRecordIDParamsDescription).decorators(decorators).build());
+        commandDescriptionMap.put("findAll", CommandDescription.newBuilder(FindAllCommand.class)
+                .decorator(AddProgramNameDecorator.class).build());
+        commandDescriptionMap.put("findByID", CommandDescription.newBuilder(FindByIDCommand.class)
+                .paramDescription(onlyRecordIDParamsDescription).decorator(AddProgramNameDecorator.class).build());
+        commandDescriptionMap.put("help", CommandDescription.newBuilder(HelpCommand.class).build());
+        commandDescriptionMap.put("about", CommandDescription.newBuilder(AboutCommand.class).build());
     }
 
     public CommandDescription getCommandDescription(String commandName) {
@@ -34,25 +45,16 @@ public class CommandDescriptionRegistry {
 
     private Collection<ParamDescription> generateRecordFieldsParamsDescription() throws ExpectedDefaultValueException {
         Collection<ParamDescription> paramsDescription = new ArrayList<>();
-        ParamDescription.Builder builder;
 
-        builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("text").paramClass(String.class).required(true).build());
-
-        builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("author").paramClass(String.class).required(false).defaultValue("anonymous").length(200).build());
-
-        builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("type").paramClass(String.class).required(false).defaultValue("no type").length(100).build());
-
-        builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("title").paramClass(String.class).required(false).defaultValue("no title").length(200).build());
+        paramsDescription.add(ParamDescription.newBuilder().paramName("text").paramClass(String.class).required(true).build());
+        paramsDescription.add(ParamDescription.newBuilder().paramName("author").paramClass(String.class).required(false).defaultValue("anonymous").length(200).build());
+        paramsDescription.add(ParamDescription.newBuilder().paramName("type").paramClass(String.class).required(false).defaultValue("no type").length(100).build());
+        paramsDescription.add(ParamDescription.newBuilder().paramName("title").paramClass(String.class).required(false).defaultValue("no title").length(200).build());
 
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
         calendar.set(calendar.get(Calendar.YEAR) + 1, 0, 1);
-        builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("deadline").paramClass(Date.class).required(false).defaultValue(calendar.getTime()).build());
+        paramsDescription.add(ParamDescription.newBuilder().paramName("deadline").paramClass(Date.class).required(false).defaultValue(calendar.getTime()).build());
 
         return Collections.unmodifiableCollection(paramsDescription);
     }
@@ -60,8 +62,7 @@ public class CommandDescriptionRegistry {
     private Collection<ParamDescription> generateOnlyRecordIDParamsDescription() throws ExpectedDefaultValueException {
         Collection<ParamDescription> paramsDescription = new ArrayList<>();
 
-        ParamDescription.Builder builder = ParamDescription.newBuilder();
-        paramsDescription.add(builder.paramName("recordID").paramClass(Integer.class).required(true)
+        paramsDescription.add(ParamDescription.newBuilder().paramName("recordID").paramClass(Integer.class).required(true)
                 .validators(ValidatorRegistry.getInstance().getValidator(ValidatorNames.NotNegativeNumber)).build());
 
         return Collections.unmodifiableCollection(paramsDescription);

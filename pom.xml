@@ -14,6 +14,7 @@
         <module>NoteBookCore</module>
         <module>ConsoleModule</module>
         <module>ServletModule</module>
+        <module>SpringMVCModule</module>
     </modules>
 
     <build>

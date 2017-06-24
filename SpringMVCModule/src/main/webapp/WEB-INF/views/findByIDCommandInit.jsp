@@ -11,8 +11,8 @@
     <title>NoteBook</title>
 </head>
 <body>
-    <form action="/command" method="post">
-        <label>RecordID: <input type="number" name="serv_ID" /></label><br/>
+    <form action="/notebook/command" method="post">
+        <label>RecordID: <input type="number" name="spr_ID" /></label><br/>
         <button name="command" value="findByID">Send</button>
     </form>
 </body>

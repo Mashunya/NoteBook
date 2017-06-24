@@ -4,23 +4,21 @@ import notebook.command.params.ParamDescription;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Маша on 15.06.2017.
  */
 public class CommandDescription {
 
-    protected Class commandClass;
-    protected Collection<ParamDescription> paramsDescription;
+    private Class commandClass;
+    private Collection<ParamDescription> paramsDescription;
+    private List<Class> decorators;
 
-    public CommandDescription(Class commandClass) {
+    private CommandDescription(Class commandClass) {
         this.commandClass = commandClass;
         this.paramsDescription = new ArrayList<>();
-    }
-
-    public CommandDescription(Class commandClass, Collection<ParamDescription> paramsDescription) {
-        this.commandClass = commandClass;
-        this.paramsDescription = paramsDescription;
+        this.decorators = new ArrayList<>();
     }
 
     public Class getCommandClass() {
@@ -29,5 +27,37 @@ public class CommandDescription {
 
     public Collection<ParamDescription> getParamsDescription() {
         return paramsDescription;
+    }
+
+    public List<Class> getDecorators() {
+        return decorators;
+    }
+
+    public static Builder newBuilder(Class commandClass) {
+        return new CommandDescription(commandClass).new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() {}
+
+        public Builder paramDescription(Collection<ParamDescription> paramDescription) {
+            CommandDescription.this.paramsDescription = paramDescription;
+            return this;
+        }
+
+        public Builder decorator(Class decorator) {
+            CommandDescription.this.decorators.add(decorator);
+            return this;
+        }
+
+        public Builder decorators(List<Class> decorators) {
+            CommandDescription.this.decorators = decorators;
+            return this;
+        }
+
+        public CommandDescription build() {
+            return CommandDescription.this;
+        }
     }
 }

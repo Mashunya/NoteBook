@@ -13,13 +13,13 @@ public class ArgsConverter {
 
     public ArgsConverter() {
         paramConvertMap = new HashMap<>();
-        paramConvertMap.put("serv_command", "command");
         paramConvertMap.put("serv_text", "text");
         paramConvertMap.put("serv_title", "title");
         paramConvertMap.put("serv_author", "author");
         paramConvertMap.put("serv_type", "type");
         paramConvertMap.put("serv_deadline", "deadline");
         paramConvertMap.put("serv_ID", "recordID");
+        paramConvertMap.put("command", "command");
     }
 
     public Map<String, Object> convert(Map<String, String[]> params) throws IllegalCommandParamException {
@@ -38,7 +38,7 @@ public class ArgsConverter {
                 convertedParams.put(newFieldName, value);
             }
         }
-
+        convertedParams.remove("command");
         return convertedParams;
     }
 }

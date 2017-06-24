@@ -18,13 +18,12 @@
 <p>${result.record.recordText}</p>
 <p>${result.record.author}</p>
 <p>${result.record.title}</p>
-<fmt:formatDate value="${result.record.deadlineDate}" pattern="dd.MM.yyyy" />
-<fmt:formatDate value="${result.record.createdDate}" pattern="dd.MM.yyyy" />
-<fmt:formatDate value="${result.record.updatedDate}" pattern="dd.MM.yyyy" />
+<fmt:formatDate value="${result.record.deadlineDate}" pattern="${dateFormat}" />
+<fmt:formatDate value="${result.record.createdDate}" pattern="${dateFormat}" />
+<fmt:formatDate value="${result.record.updatedDate}" pattern="${dateFormat}" />
 <c:forEach items="${result.messages}" var="message" varStatus="varStatus">
     <pre>${varStatus.index}: ${message.message}, ${message.status}</pre>
 </c:forEach>
-</body>
-
+<a href="/notebook/">На главную</a>
 </body>
 </html>
