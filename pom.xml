@@ -12,6 +12,8 @@
 
     <modules>
         <module>NoteBookCore</module>
+        <module>MySQLStoreModule</module>
+        <module>FileStoreModule</module>
         <module>ConsoleModule</module>
         <module>ServletModule</module>
         <module>SpringMVCModule</module>

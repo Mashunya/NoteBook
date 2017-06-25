@@ -12,9 +12,9 @@
 </head>
 <body>
 <form action="/notebook/command" method="post">
-    <a href="/notebook/add">Add</a>
-    <a href="deleteCommandInit.jsp">Delete</a>
-    <a href="findByIDCommandInit.jsp">FindByID</a>
+    <a href="/notebook/init?commandName=add">Add</a>
+    <a href="/notebook/init?commandName=delete">Delete</a>
+    <a href="/notebook/init?commandName=findByID">FindByID</a>
     <button name="command" value="findAll">Find All</button>
     <button name="command" value="about">About</button>
 </form>

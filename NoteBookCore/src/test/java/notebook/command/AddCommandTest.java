@@ -1,7 +1,7 @@
 package notebook.command;
 
+import notebook.dao.GenericDAO;
 import notebook.entity.Record;
-import notebook.services.NoteBookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -29,15 +29,15 @@ public class AddCommandTest {
         params.put("author", "test author");
         params.put("type", "test type");
 
-        NoteBookService noteBookService = mock(NoteBookService.class);
-        addCommand.setNoteBookService(noteBookService);
+        GenericDAO<Record, Integer> recordDAO = mock(GenericDAO.class);
+        addCommand.setRecordDAO(recordDAO);
 
         //when
         addCommand.execute(params);
 
         //then
         ArgumentCaptor<Record> recordArgument = ArgumentCaptor.forClass(Record.class);
-        verify(noteBookService).addRecord(recordArgument.capture());
+        verify(recordDAO).persist(recordArgument.capture());
         assertEquals("test text", recordArgument.getValue().getRecordText());
         assertEquals("test title", recordArgument.getValue().getTitle());
         assertEquals("test author", recordArgument.getValue().getAuthor());

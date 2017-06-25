@@ -1,7 +1,7 @@
 package notebook.command;
 
+import notebook.dao.exception.DAOException;
 import notebook.entity.Record;
-import notebook.exception.SaveRecordsException;
 import notebook.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by Маша on 08.06.2017.
  */
-public class AddCommand extends CommandWorkedWithNoteBook {
+public class AddCommand extends CommandWorkedWithDAO {
 
     private final Logger logger = LoggerFactory.getLogger(AddCommand.class);
 
@@ -23,10 +23,10 @@ public class AddCommand extends CommandWorkedWithNoteBook {
 
         Message resultMessage;
         try {
-            noteBookService.addRecord(record);
+            recordDAO.persist(record);
             resultMessage = new Message("Запись успешно добавлена", MessageStatus.SUCCESS);
             logger.info("Запись успешно добавлена");
-        } catch(SaveRecordsException ex) {
+        } catch(DAOException ex) {
             resultMessage = new Message(ex.getMessage(), MessageStatus.ERROR);
             logger.error(ex.getMessage(), ex);
         }

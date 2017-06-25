@@ -5,12 +5,12 @@ import notebook.command.description.CommandDescription;
 import notebook.command.description.CommandDescriptionRegistry;
 import notebook.command.factory.CommandFactory;
 import notebook.command.params.InputDataPreparator;
-import notebook.entity.NoteBook;
+import notebook.dao.DAOFactory;
+import notebook.dao.exception.ContextException;
+import notebook.dao.exception.FindDAOException;
+import notebook.entity.Record;
 import notebook.exception.*;
-import notebook.id.IDGen;
 import notebook.model.*;
-import notebook.services.NoteBookService;
-import notebook.store.RecordStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,21 +26,11 @@ public abstract class WorkWithNotebook<T> {
     private Logger logger = LoggerFactory.getLogger(WorkWithNotebook.class);
     private static final String DEFAULT_COMMAND_NAME = "help";
 
-    private NoteBookService noteBookService;
+    protected DAOFactory daoFactory;
 
-    public List<Message> init(RecordStore recordStore, IDGen idGen) {
-        List<Message> initErrorMessages = new ArrayList<>();
-        try {
-            noteBookService = new NoteBookService(new NoteBook(), idGen, recordStore);
-            noteBookService.init();
-        } catch (WorkWithFileException ex) {
-            initErrorMessages.add(new Message(ex.getMessage(), MessageStatus.ERROR));
-            logger.error(ex.getMessage(), ex);
-        }
-        return initErrorMessages;
-    }
+    protected abstract void initDAOFactory() throws ContextException, ResourceNotFoundException, PropFileLoadException;
 
-    public final ModelAndView workWithNotebookService(T params, List<Message> initErrorMessages) {
+    public final ModelAndView workWithNotebookService(T params) {
         List<Message> errorMessages = new ArrayList<>();
         ModelAndView commandResult = new ModelAndView("MessagesView", new MessageListModel());
         try {
@@ -53,7 +43,7 @@ public abstract class WorkWithNotebook<T> {
             errorMessages.add(new Message(ex.getMessage(), MessageStatus.ERROR));
             logger.error(ex.getMessage(), ex);
         }
-        addErrorsToResult(commandResult, initErrorMessages, errorMessages);
+        addErrorsToResult(commandResult, errorMessages);
         return commandResult;
     }
 
@@ -90,15 +80,14 @@ public abstract class WorkWithNotebook<T> {
         return preparedParams;
     }
 
-    private ModelAndView executeCommand(Map<String, Object> preparedParams, CommandDescription commandDescription) {
+    private ModelAndView executeCommand(Map<String, Object> preparedParams, CommandDescription commandDescription) throws FindDAOException {
         CommandFactory commandFactory = new CommandFactory();
-        Command command = commandFactory.createCommand(commandDescription, noteBookService);
+        Command command = commandFactory.createCommand(commandDescription, daoFactory.getDAO(Record.class));
         return command.execute(preparedParams);
     }
 
-    private void addErrorsToResult(ModelAndView commandResult, List<Message> initErrorMessages, List<Message> errorMessages) {
+    private void addErrorsToResult(ModelAndView commandResult, List<Message> errorMessages) {
         Model model = commandResult.getModel();
-        model.addAllMessages(initErrorMessages);
         model.addAllMessages(errorMessages);
     }
 }

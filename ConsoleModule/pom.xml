@@ -65,5 +65,11 @@
             <artifactId>NoteBookCore</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>notebook.parent</groupId>
+            <artifactId>FileStoreModule</artifactId>
+            <version>1.0</version>
+        </dependency>
 	</dependencies>
 </project>

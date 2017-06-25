@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Маша on 08.06.2017.
  */
-public class HelpCommand extends CommandWorkedWithNoteBook {
+public class HelpCommand extends CommandWorkedWithDAO {
 
     @Override
     public ModelAndView execute(Map<String, Object> params) {

@@ -1,7 +1,16 @@
 package notebook.args_converter;
 
+import notebook.DateFormatExtractor;
+import notebook.GlobalParamsExtractor;
 import notebook.exception.IllegalCommandParamException;
+import notebook.exception.PropFileLoadException;
+import notebook.exception.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +18,7 @@ import java.util.Map;
  * Created by Маша on 22.06.2017.
  */
 public class ArgsConverter {
+    private static final Logger logger = LoggerFactory.getLogger(ArgsConverter.class);
     private Map<String, String> paramConvertMap;
 
     public ArgsConverter() {
@@ -38,6 +48,19 @@ public class ArgsConverter {
                 convertedParams.put(newFieldName, value);
             }
         }
+        String sourceDate = (String)convertedParams.get("deadline");
+        if(sourceDate != null) {
+            String dateFormat = DateFormatExtractor.getDateFormat();
+
+            DateFormat targetFormat = new SimpleDateFormat(dateFormat);
+            DateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                convertedParams.put("deadline", targetFormat.format(sourceFormat.parse(sourceDate)));
+            } catch(ParseException ex) {
+                logger.error(ex.getMessage(), ex);
+            }
+        }
+
         convertedParams.remove("command");
         return convertedParams;
     }

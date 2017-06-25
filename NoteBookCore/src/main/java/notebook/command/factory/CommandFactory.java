@@ -1,9 +1,10 @@
 package notebook.command.factory;
 
 import notebook.command.Command;
-import notebook.command.CommandWorkedWithNoteBook;
+import notebook.command.CommandWorkedWithDAO;
 import notebook.command.description.CommandDescription;
-import notebook.services.NoteBookService;
+import notebook.dao.GenericDAO;
+import notebook.entity.Record;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +18,13 @@ public class CommandFactory {
 
     private final static Logger logger = LoggerFactory.getLogger(CommandFactory.class);
 
-    public Command createCommand(CommandDescription commandDescription, NoteBookService noteBookService) {
+    public Command createCommand(CommandDescription commandDescription, GenericDAO<Record, Integer> recordDAO) {
         Command command = null;
         Class commandClass = commandDescription.getCommandClass();
         try {
             command = (Command)commandClass.newInstance();
-            if(commandClass.getSuperclass().equals(CommandWorkedWithNoteBook.class)) {
-                ((CommandWorkedWithNoteBook)command).setNoteBookService(noteBookService);
+            if(commandClass.getSuperclass().equals(CommandWorkedWithDAO.class)) {
+                ((CommandWorkedWithDAO)command).setRecordDAO(recordDAO);
             }
             Constructor constructor;
             for(Class decoratorClass: commandDescription.getDecorators()) {

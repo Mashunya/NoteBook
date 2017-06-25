@@ -13,6 +13,13 @@
     <artifactId>SpringMVCModule</artifactId>
     <version>1.0</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <name>SpringMVC module for showing notebook records</name>
+
     <dependencies>
         <!-- Spring framework -->
         <dependency>
@@ -43,6 +50,12 @@
         <dependency>
             <groupId>notebook.parent</groupId>
             <artifactId>NoteBookCore</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>notebook.parent</groupId>
+            <artifactId>MySQLStoreModule</artifactId>
             <version>1.0</version>
         </dependency>
 

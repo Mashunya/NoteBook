@@ -1,5 +1,6 @@
 package notebook.command;
 
+import notebook.dao.exception.DAOException;
 import notebook.exception.SaveRecordsException;
 import notebook.model.*;
 import org.slf4j.Logger;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Маша on 08.06.2017.
  */
-public class DeleteCommand extends CommandWorkedWithNoteBook {
+public class DeleteCommand extends CommandWorkedWithDAO {
 
     private final Logger logger = LoggerFactory.getLogger(DeleteCommand.class);
 
@@ -19,14 +20,14 @@ public class DeleteCommand extends CommandWorkedWithNoteBook {
         Message resultMessage;
         try {
             int recordID = (int)params.get("recordID");
-            if(noteBookService.deleteRecord(recordID)) {
+            if(recordDAO.delete(recordID)) {
                 resultMessage = new Message("Запись c ID: " + recordID + " успешно удалена", MessageStatus.SUCCESS);
                 logger.info("Запись c ID: " + recordID + " успешно удалена");
             } else {
                 resultMessage = new Message("Запись c ID: " + recordID + " не найдена", MessageStatus.WARNING);
                 logger.warn("DeleteRecord: запись c ID: " + recordID + " не найдена");
             }
-        } catch (SaveRecordsException ex) {
+        } catch (DAOException ex) {
             logger.error(ex.getMessage(), ex);
             resultMessage = new Message(ex.getMessage(), MessageStatus.ERROR);
         }
