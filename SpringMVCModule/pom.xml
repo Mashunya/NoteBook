@@ -55,7 +55,7 @@
 
         <dependency>
             <groupId>notebook.parent</groupId>
-            <artifactId>MySQLStoreModule</artifactId>
+            <artifactId>HibernateStoreModule</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -63,6 +63,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>notebook.parent</groupId>
+            <artifactId>HibernateStoreModule</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

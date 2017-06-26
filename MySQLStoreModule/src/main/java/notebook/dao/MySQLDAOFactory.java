@@ -1,12 +1,7 @@
 package notebook.dao;
 
 import notebook.PropsLoader;
-import notebook.dao.DAOFactory;
-import notebook.dao.GenericDAO;
-import notebook.dao.MySQLRecordDAO;
 import notebook.dao.exception.ContextException;
-import notebook.dao.exception.DAOException;
-import notebook.dao.exception.FindDAOException;
 import notebook.entity.Record;
 import notebook.exception.PropFileLoadException;
 import notebook.exception.ResourceNotFoundException;
@@ -23,14 +18,16 @@ import java.util.Map;
 public class MySQLDAOFactory extends DAOFactory<Connection> {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
-    public MySQLDAOFactory() throws ContextException, ResourceNotFoundException, PropFileLoadException {
-        Connection context = getContext();
+    @Override
+    public void init() throws ContextException, ResourceNotFoundException, PropFileLoadException {
+        Connection context = initContext();
+
         DAOMap = new HashMap<>();
         DAOMap.put(Record.class, new MySQLRecordDAO(context));
     }
 
     @Override
-    public Connection getContext() throws ContextException, PropFileLoadException, ResourceNotFoundException {
+    public Connection initContext() throws ContextException, PropFileLoadException, ResourceNotFoundException {
         try {
             Class.forName(DRIVER);
             PropsLoader propsLoader = new PropsLoader("connection.properties");

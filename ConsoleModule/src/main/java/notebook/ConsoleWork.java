@@ -19,6 +19,7 @@ public class ConsoleWork extends WorkWithNotebook<String[]> {
     @Override
     protected void initDAOFactory() throws ContextException, ResourceNotFoundException, PropFileLoadException {
         daoFactory = new FileDAOFactory();
+        daoFactory.init();
     }
 
     @Override

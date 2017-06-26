@@ -1,7 +1,7 @@
 package notebook;
 
 import notebook.args_converter.ArgsConverter;
-import notebook.dao.MySQLDAOFactory;
+import notebook.dao.HibernateDAOFactory;
 import notebook.dao.exception.ContextException;
 import notebook.exception.IllegalCommandParamException;
 import notebook.exception.PropFileLoadException;
@@ -18,8 +18,9 @@ import java.util.Map;
 public class SpringMVCWork extends WorkWithNotebook<MultiValueMap<String, String>> {
 
     @Override
-    protected void initDAOFactory() throws ContextException, ResourceNotFoundException, PropFileLoadException {
-        daoFactory = new MySQLDAOFactory();
+    protected void initDAOFactory() throws PropFileLoadException, ResourceNotFoundException, ContextException {
+        daoFactory = new HibernateDAOFactory();
+        daoFactory.init();
     }
 
     @Override

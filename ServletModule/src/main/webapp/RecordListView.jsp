@@ -11,21 +11,26 @@
 <html>
 <head>
     <title>NoteBook</title>
+    <link href="/resources/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Result</h1>
-    <c:forEach items="${result.records}" var="record" varStatus="varStatus">
-        <p>${record.recordID}</p>
-        <p>${record.recordText}</p>
-        <p>${record.author}</p>
-        <p>${record.title}</p>
-        <fmt:formatDate value="${record.deadlineDate}" pattern="${dateFormat}" />
-        <fmt:formatDate value="${record.createdDate}" pattern="${dateFormat}" />
-        <fmt:formatDate value="${record.updatedDate}" pattern="${dateFormat}" />
-    </c:forEach>
+<h1>Result</h1>
+<c:forEach items="${result.records}" var="record" varStatus="varStatus">
+    <table class="record">
+        <tr><td>ID:</td><td>${record.recordID}</td></tr>
+        <tr><td>Title:</td><td>${record.title}</td></tr>
+        <tr><td>Text:</td><td>${record.recordText}</td></tr>
+        <tr><td>Author:</td><td>${record.author}</td></tr>
+        <tr><td>Deadline date:</td><td><fmt:formatDate value="${record.deadlineDate}" pattern="${dateFormat}" /></td></tr>
+        <tr><td>Created date:</td><td><fmt:formatDate value="${record.createdDate}" pattern="${dateFormat}" /></td></tr>
+        <tr><td>Updated date:</td><td><fmt:formatDate value="${record.updatedDate}" pattern="${dateFormat}" /></td></tr>
+    </table>
+</c:forEach>
+<div class="message">
     <c:forEach items="${result.messages}" var="message" varStatus="varStatus">
-        <pre>${varStatus.index}: ${message.message}, ${message.status}</pre>
+        <pre class="${message.status}">${message.status}: ${message.message}</pre>
     </c:forEach>
-    <a href="index.jsp">На главную</a>
+</div>
+<a href="index.jsp" class="button">На главную</a>
 </body>
 </html>

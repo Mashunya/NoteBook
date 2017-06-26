@@ -9,11 +9,24 @@
 <html>
 <head>
     <title>NoteBook</title>
+    <link href="/resources/css/style.css" rel="stylesheet" />
 </head>
 <body>
+<div class="center">
     <form action="/command" method="post">
-        <label>RecordID: <input type="number" name="serv_ID" /></label><br/>
-        <button name="command" value="delete">Send</button>
+        <ul>
+            <li>
+                <h3>Initialize delete record command</h3>
+            </li>
+            <li>
+                <label for="id">ID:</label>
+                <input type="text" name="serv_ID" id = "id" />
+            </li>
+            <li class="center">
+                <button name="command" value="delete" class="submit">Submit</button>
+            </li>
+        </ul>
     </form>
+</div>
 </body>
 </html>

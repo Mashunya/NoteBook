@@ -9,14 +9,15 @@
 <html>
 <head>
     <title>NoteBook</title>
+    <link href="/resources/css/style.css" rel="stylesheet" />
 </head>
 <body>
 <form action="/notebook/command" method="post">
-    <a href="/notebook/init?commandName=add">Add</a>
-    <a href="/notebook/init?commandName=delete">Delete</a>
-    <a href="/notebook/init?commandName=findByID">FindByID</a>
-    <button name="command" value="findAll">Find All</button>
-    <button name="command" value="about">About</button>
+    <a href="/notebook/init?commandName=add" class="button">Add</a>
+    <a href="/notebook/init?commandName=delete" class="button">Delete</a>
+    <a href="/notebook/init?commandName=findByID" class="button">FindByID</a>
+    <button name="command" value="findAll" class="submit">Find All</button>
+    <button name="command" value="about" class="submit">About</button>
 </form>
 </body>
 </html>

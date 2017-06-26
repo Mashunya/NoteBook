@@ -19,6 +19,7 @@ public class ServletWork extends WorkWithNotebook<Map<String, String[]>> {
     @Override
     protected void initDAOFactory() throws ContextException, ResourceNotFoundException, PropFileLoadException {
         daoFactory = new MySQLDAOFactory();
+        daoFactory.init();
     }
 
     @Override

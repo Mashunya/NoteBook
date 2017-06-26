@@ -14,7 +14,9 @@ import java.util.Map;
 public abstract class DAOFactory<C> {
     protected Map<Class, GenericDAO> DAOMap;
 
-    public abstract C getContext() throws ContextException, PropFileLoadException, ResourceNotFoundException;
+    public abstract C initContext() throws ContextException, PropFileLoadException, ResourceNotFoundException;
+
+    public abstract void init() throws ContextException, ResourceNotFoundException, PropFileLoadException;
 
     public GenericDAO getDAO(Class entityClass) throws FindDAOException {
         GenericDAO dao = DAOMap.get(entityClass);

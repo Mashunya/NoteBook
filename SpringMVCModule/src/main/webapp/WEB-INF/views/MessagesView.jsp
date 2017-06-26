@@ -10,12 +10,15 @@
 <html>
 <head>
     <title>NoteBook</title>
+    <link href="/resources/css/style.css" rel="stylesheet" />
 </head>
 <body>
     <h1>Result</h1>
-    <c:forEach items="${result.messages}" var="message" varStatus="varStatus">
-        <pre>${varStatus.index}: ${message.message}, ${message.status}</pre>
-    </c:forEach>
-    <a href="/notebook/">На главную</a>
+    <div class="message">
+        <c:forEach items="${result.messages}" var="message" varStatus="varStatus">
+            <pre class="${message.status}">${message.status}: ${message.message}</pre>
+        </c:forEach>
+    </div>
+    <a href="/notebook/" class="button">На главную</a>
 </body>
 </html>
