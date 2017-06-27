@@ -13,6 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.hibernate.service.spi.ServiceException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,24 +24,26 @@ import java.util.Properties;
 /**
  * Created by Маша on 26.06.2017.
  */
-public class HibernateDAOFactory extends DAOFactory<Session> {
+public class HibernateDAOFactory extends DAOFactory<SessionFactory> {
     @Override
-    public Session initContext() {
-        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().build();
+    public SessionFactory initContext() throws ContextException {
+        try {
+            StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().build();
 
-        Metadata metadata = new MetadataSources( standardRegistry )
-                .addAnnotatedClass( Record.class )
-                .getMetadataBuilder()
-                .build();
+            Metadata metadata = new MetadataSources( standardRegistry )
+                    .addAnnotatedClass( Record.class )
+                    .getMetadataBuilder()
+                    .build();
 
-        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
-
-        return sessionFactory.openSession();
+            return metadata.getSessionFactoryBuilder().build();
+        } catch(ServiceException ex) {
+            throw new ContextException(ex);
+        }
     }
 
     @Override
     public void init() throws ContextException, ResourceNotFoundException, PropFileLoadException {
-        Session context = initContext();
+        SessionFactory context = initContext();
 
         DAOMap = new HashMap<>();
         DAOMap.put(Record.class, new HibernateRecordDAO(context));

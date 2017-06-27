@@ -39,7 +39,8 @@ body {
 }
 
 .record td {
-    padding: 10px;
+    padding: 5px;
+    line-height: 20px;
 }
 
 .record td:first-child {
@@ -52,7 +53,7 @@ body {
     font-family: Georgia, Times, "Times New Roman", serif;
     background-color: white;
     padding: 20px;
-    margin: 20px;
+    margin: 10px 20px;
     border: saddlebrown 3px solid;
 }
 

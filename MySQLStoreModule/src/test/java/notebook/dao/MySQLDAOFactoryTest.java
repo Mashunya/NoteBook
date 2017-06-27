@@ -15,7 +15,7 @@ import java.sql.Connection;
  */
 @RunWith(JUnit4.class)
 public class MySQLDAOFactoryTest {
-    @Test
+    @Test(expected = ContextException.class)
     public void initDAOFactoryWithConnectionToDB() throws PropFileLoadException, ResourceNotFoundException, ContextException {
         //given
         DAOFactory<Connection> factory = new MySQLDAOFactory();

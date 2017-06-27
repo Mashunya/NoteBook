@@ -2,11 +2,13 @@ package notebook.dao;
 
 import com.ibatis.common.jdbc.ScriptRunner;
 import notebook.PropsLoader;
+import notebook.dao.exception.ContextException;
 import notebook.dao.exception.DAOException;
 import notebook.entity.Record;
 import notebook.exception.PropFileLoadException;
 import notebook.exception.ResourceNotFoundException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -21,6 +23,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.spy;
 
 /**
  * Created by Маша on 26.06.2017.
@@ -28,12 +31,11 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class HibernateRecordDAOTest {
 
-    private static Session session;
+    private static SessionFactory sessionFactory;
     private static String url;
-    private Transaction curTransaction;
 
     @BeforeClass
-    public static void generateTestDB() throws PropFileLoadException, ResourceNotFoundException, SQLException, IOException {
+    public static void generateTestDB() throws ContextException, PropFileLoadException, ResourceNotFoundException, SQLException, IOException {
         PropsLoader propsLoader = new PropsLoader("hibernate.properties");
         Map<String, String> connectionProps = propsLoader.loadAllProps();
         url = "jdbc:mysql://localhost/?user=" + connectionProps.get("hibernate.connection.username") +
@@ -45,18 +47,13 @@ public class HibernateRecordDAOTest {
         scriptRunner.runScript(reader);
         connection.close();
 
-        session = new HibernateDAOFactory().initContext();
-    }
-
-    @Before
-    public void beginTransaction() throws SQLException {
-        curTransaction = session.beginTransaction();
+        sessionFactory = new HibernateDAOFactory().initContext();
     }
 
     @Test
     public void persistTest() throws DAOException {
         //given
-        GenericDAO<Record, Integer> recordDAO = new HibernateRecordDAO(session);
+        GenericDAO<Record, Integer> recordDAO = new HibernateRecordDAO(sessionFactory);
         Calendar calendar = new GregorianCalendar();
         calendar.set(2017, Calendar.AUGUST, 30);
         Date deadline = calendar.getTime();
@@ -70,25 +67,12 @@ public class HibernateRecordDAOTest {
     }
 
     @Test
-    public void deleteTest() throws DAOException {
-        //given
-        GenericDAO<Record, Integer> recordDAO = new HibernateRecordDAO(session);
-        assertNotNull(recordDAO.findByID(1));
-
-        //when
-        recordDAO.delete(1);
-
-        //then
-        assertNull(recordDAO.findByID(1));
-    }
-
-    @Test
     public void findByIDTest() throws DAOException {
         //given
-        GenericDAO<Record, Integer> recordDAO = new HibernateRecordDAO(session);
+        GenericDAO<Record, Integer> recordDAO = new HibernateRecordDAO(sessionFactory);
 
         //when
-        Record existRecord = recordDAO.findByID(1);
+        Record existRecord = recordDAO.findByID(2);
         Record notExistRecord = recordDAO.findByID(100);
 
         //then
@@ -99,18 +83,13 @@ public class HibernateRecordDAOTest {
     @Test
     public void findAll() throws DAOException {
         //given
-        GenericDAO<Record, Integer> recordDAO = new HibernateRecordDAO(session);
+        GenericDAO<Record, Integer> recordDAO = new HibernateRecordDAO(sessionFactory);
 
         //when
         List<Record> records = recordDAO.findAll();
 
         //then
-        assertEquals(3, records.size());
-    }
-
-    @After
-    public void rollbackTransaction() throws SQLException {
-        curTransaction.rollback();
+        assertNotNull(records);
     }
 
     @AfterClass
@@ -120,7 +99,5 @@ public class HibernateRecordDAOTest {
         Reader reader = new FileReader(System.getProperty("user.dir") + "/src/test/resources/dropDB.sql");
         scriptRunner.runScript(reader);
         connection.close();
-
-        session.close();
     }
 }

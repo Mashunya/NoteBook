@@ -1,5 +1,6 @@
 package notebook.dao;
 
+import notebook.dao.exception.ContextException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -9,8 +10,9 @@ import org.junit.runners.JUnit4;
  */
 @RunWith(JUnit4.class)
 public class HibernateDAOFactoryTest {
-    @Test
-    public void initContext() {
+
+    @Test(expected = ContextException.class)
+    public void initContextDBNOtExist() throws ContextException {
         //given
         HibernateDAOFactory factory = new HibernateDAOFactory();
 
